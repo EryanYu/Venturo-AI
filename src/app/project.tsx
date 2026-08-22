@@ -4,10 +4,14 @@ import {
   Text,
   View,
 } from "react-native";
-
+import ProjectCard from "@/components/project/ProjectCard";
+import {
+ projectMockData
+} from "@/data/projectMockData";
 
 export default function ProjectScreen(){
 
+const projects = projectMockData;
 
   return (
 
@@ -237,6 +241,43 @@ export default function ProjectScreen(){
       </Pressable>
 
 
+    <View style={styles.section}>
+
+
+      <Text style={styles.sectionTitle}>
+
+      🔥 热门创业项目
+
+      </Text>
+
+
+      {
+      projects.map((item,index)=>(
+
+
+      <ProjectCard
+
+      key={index}
+
+      name={item.name}
+
+      industry={item.industry}
+
+      stage={item.stage}
+
+      description={item.description}
+
+      aiScore={item.aiScore}
+
+
+      />
+
+
+      ))
+      }
+
+
+    </View>
 
 
 
@@ -539,6 +580,18 @@ fontWeight:"600",
 
 },
 
+
+
+section:{
+marginTop:20,
+},
+
+
+sectionTitle:{
+fontSize:20,
+fontWeight:"700",
+marginBottom:12,
+},
 
 
 });

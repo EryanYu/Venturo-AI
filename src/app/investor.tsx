@@ -4,10 +4,14 @@ import {
   Text,
   View,
 } from "react-native";
-
+import MatchCard from "@/components/matching/MatchCard";
+import {
+ matchingMockData
+} from "@/data/matchingMockData";
 
 export default function InvestorScreen(){
 
+const matches = matchingMockData;
 
 return (
 
@@ -187,6 +191,39 @@ AI创业生态平台，
 </Pressable>
 
 
+<View style={styles.section}>
+
+
+<Text style={styles.sectionTitle}>
+🤖 AI推荐投资机会
+</Text>
+
+
+{
+matches.map((item,index)=>(
+
+
+<MatchCard
+
+key={index}
+
+score={item.score}
+
+category={item.category}
+
+reason={item.reason}
+
+
+/>
+
+
+))
+}
+
+
+</View>
+
+
 
 </View>
 
@@ -332,6 +369,19 @@ buttonText:{
 color:"#fff",
 fontSize:17,
 fontWeight:"600",
+},
+
+
+
+section:{
+marginTop:20,
+},
+
+
+sectionTitle:{
+fontSize:20,
+fontWeight:"700",
+marginBottom:12,
 },
 
 
