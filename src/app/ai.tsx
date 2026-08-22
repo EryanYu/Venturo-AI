@@ -5,9 +5,21 @@ import {
     TextInput,
     View,
 } from "react-native";
-
+import AIAssistantCard from "@/components/ai/AIAssistantCard";
+import {
+  aiServices
+} from "@/data/assistantMockData";
+import { getUser } from "@/store/userStore";
+import {
+roleAIServices
+} from "@/data/roleAIData";
 
 export default function AIScreen(){
+
+const user = getUser();
+
+const services =
+roleAIServices[user.role];
 
   return (
 
@@ -62,75 +74,25 @@ export default function AIScreen(){
 
 
 
-      <View style={styles.serviceCard}>
+      {
+      services.map((item,index)=>(
 
+      <AIAssistantCard
 
-        <Text style={styles.serviceTitle}>
-          🚀 创业诊断
-        </Text>
+      key={index}
 
+      icon={item.icon}
 
-        <Text style={styles.serviceDesc}>
-          分析项目方向、市场机会、竞争环境和商业模式。
-        </Text>
+      title={item.title}
 
+      description={item.description}
 
-        <Text style={styles.cost}>
-          消耗 Points：50
-        </Text>
+      points={item.points}
 
+      />
 
-      </View>
-
-
-
-
-
-      <View style={styles.serviceCard}>
-
-
-        <Text style={styles.serviceTitle}>
-          💰 融资顾问
-        </Text>
-
-
-        <Text style={styles.serviceDesc}>
-          分析融资阶段，匹配投资方向。
-        </Text>
-
-
-        <Text style={styles.cost}>
-          消耗 Points：100
-        </Text>
-
-
-      </View>
-
-
-
-
-
-      <View style={styles.serviceCard}>
-
-
-        <Text style={styles.serviceTitle}>
-          📈 BP优化
-        </Text>
-
-
-        <Text style={styles.serviceDesc}>
-          优化商业计划书，提高融资成功率。
-        </Text>
-
-
-        <Text style={styles.cost}>
-          消耗 Points：80
-        </Text>
-
-
-      </View>
-
-
+      ))
+      }
 
 
 

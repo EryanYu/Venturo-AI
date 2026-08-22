@@ -4,10 +4,55 @@ import {
     Text,
     View,
 } from "react-native";
-
-
+import IntelligenceCard from "@/components/ai/IntelligenceCard";
+import InsightCard from "@/components/ai/InsightCard";
+import RecommendationCard from "@/components/ai/RecommendationCard";
+import {
+  aiTrends,
+  aiDirections,
+  aiInvestments,
+} from "@/data/aiMockData";
 export default function IntelligenceScreen(){
 
+const trends = [
+{
+ title:"AI Agent 智能代理",
+ description:"OpenAI 最新模型推动 AI Agent 生态发展"
+},
+
+{
+ title:"企业AI应用",
+ description:"企业正在加速部署智能助手，提高生产效率"
+},
+
+{
+ title:"垂直行业AI创业",
+ description:"AI创业机会集中在垂直行业应用"
+}
+
+];
+
+const recommendations = [
+
+{
+role:"创业者",
+title:"机器人 Robotics",
+description:"AI与机器人结合成为未来创业方向"
+},
+
+{
+role:"投资人",
+title:"AI基础设施",
+description:"模型训练、算力和基础设施持续增长"
+},
+
+{
+role:"企业/产业方",
+title:"智能制造 Industry AI",
+description:"传统产业数字化升级机会"
+}
+
+];
 
 return (
 
@@ -36,25 +81,22 @@ AI Innovation Intelligence
 <View style={styles.card}>
 
 
-<Text style={styles.cardTitle}>
+<Text style={styles.sectionTitle}>
 🔥 今日AI趋势
 </Text>
 
 
+{
+aiTrends.map((item,index)=>(
 
-<Text style={styles.news}>
-OpenAI 最新模型推动 AI Agent 生态发展
-</Text>
+<IntelligenceCard
+key={index}
+title={item.title}
+description={item.description}
+/>
 
-
-<Text style={styles.news}>
-企业正在加速部署智能助手，提高生产效率
-</Text>
-
-
-<Text style={styles.news}>
-AI创业机会集中在垂直行业应用
-</Text>
+))
+}
 
 
 </View>
@@ -69,29 +111,34 @@ AI创业机会集中在垂直行业应用
 <View style={styles.card}>
 
 
-<Text style={styles.cardTitle}>
+<Text style={styles.sectionTitle}>
 🤖 热门创业方向
 </Text>
 
 
-<Text style={styles.item}>
-AI Agent 智能代理
-</Text>
+{
+aiDirections.map((item,index)=>(
+
+<InsightCard
+key={index}
+category={item.category}
+title={item.title}
+/>
+
+))
+}
 
 
-<Text style={styles.item}>
-机器人 Robotics
-</Text>
+<InsightCard
+category="机器人"
+title="Robotics"
+/>
 
 
-<Text style={styles.item}>
-新能源 Energy
-</Text>
-
-
-<Text style={styles.item}>
-智能制造 Industry AI
-</Text>
+<InsightCard
+category="新能源"
+title="Energy"
+/>
 
 
 </View>
@@ -106,24 +153,37 @@ AI Agent 智能代理
 <View style={styles.card}>
 
 
-<Text style={styles.cardTitle}>
-📈 投资热点
-</Text>
+{
+aiInvestments.map((item,index)=>(
+
+<RecommendationCard
+
+key={index}
+
+role={item.role}
+
+title={item.title}
+
+description={item.description}
+
+/>
+
+))
+}
 
 
-<Text style={styles.item}>
-AI基础设施
-</Text>
+<RecommendationCard
+role="投资人"
+title="AI基础设施"
+description="算力、模型和数据基础设施"
+/>
 
 
-<Text style={styles.item}>
-企业AI应用
-</Text>
-
-
-<Text style={styles.item}>
-未来计算
-</Text>
+<RecommendationCard
+role="投资人"
+title="企业AI应用"
+description="AI商业落地机会"
+/>
 
 
 </View>
