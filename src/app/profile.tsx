@@ -1,4 +1,4 @@
-import { getUser } from "@/store/userStore";
+import { useUser } from "@/context/UserContext";
 import {
   Pressable,
   StyleSheet,
@@ -10,27 +10,33 @@ import FounderDashboard from "@/components/dashboard/FounderDashboard";
 import InvestorDashboard from "@/components/dashboard/InvestorDashboard";
 import ExpertDashboard from "@/components/dashboard/ExpertDashboard";
 import EnterpriseDashboard from "@/components/dashboard/EnterpriseDashboard";
+import {ROLE_MAPPING} from "@/constants/roleMapping";
 export default function ProfileScreen(){
-const user = getUser();
+
+const { user, loading } = useUser();
+
+
+if(loading || !user){
+
+return null;
+
+}
+
+
+const systemRole =
+ROLE_MAPPING[user.role];
+
 const roleTitle =
-
-  user.role === "创业者"
-
+  systemRole === "founder"
     ? "Founder Center"
-
-    : user.role === "投资人"
-
+    : systemRole === "investor"
     ? "Investor Center"
-
-    : user.role === "专家/顾问"
-
+    : systemRole === "expert"
     ? "Expert Center"
-
-    : user.role === "企业/产业方"
-
+    : systemRole === "enterprise"
     ? "Enterprise Center"
-
     : "Venturo Center";
+
   return (
 
     <View style={styles.container}>

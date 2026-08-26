@@ -226,7 +226,7 @@ enterprise
 
 Display Name:
 
-企业/产业方
+企业/产业合作方
 
 
 Dashboard:

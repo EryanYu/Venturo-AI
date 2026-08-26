@@ -1,16 +1,35 @@
 import { ROLES } from "@/constants/role";
 
+
 export interface User {
 
-  id:string;
 
-  name:string;
+id:string;
 
-  role:
-    typeof ROLES[keyof typeof ROLES];
 
-  points:number;
+name:string;
 
-  aiLevel:number;
+
+email?:string;
+
+
+avatar?:string;
+
+
+
+role:
+typeof ROLES[keyof typeof ROLES];
+
+
+
+points:number;
+
+
+aiLevel:number;
+
+
+
+createdAt:string;
+
 
 }

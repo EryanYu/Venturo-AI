@@ -31,7 +31,7 @@ export interface AIRecommendation {
 | "创业者"
 | "投资人"
 | "专家/顾问"
-| "企业/产业方";
+| "企业/产业合作方";
 
 
 }

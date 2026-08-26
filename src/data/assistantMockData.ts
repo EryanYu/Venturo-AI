@@ -19,6 +19,29 @@ icon:"📈",
 title:"BP优化",
 description:"优化商业计划书，提高融资成功率。",
 points:80
+},
+
+{
+id:"ai_rec_001",
+
+targetRole:"创业者",
+
+title:"AI Agent SaaS创业机会",
+
+...
+
+relatedProjects:[
+"project_001"
+],
+
+relatedInvestors:[
+"investor_001"
+],
+
+relatedExperts:[
+"expert_001"
+]
+
 }
 
 ];

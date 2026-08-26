@@ -2,13 +2,14 @@
   "name": "venturo-ai-mobile",
   "main": "expo-router/entry",
   "expo": {
-  "router": {
-    "root": "./src/app"
-  }
-},
+    "router": {
+      "root": "./src/app"
+    }
+  },
   "version": "1.0.0",
   "dependencies": {
     "@expo/ui": "~57.0.11",
+    "@react-native-async-storage/async-storage": "2.2.0",
     "expo": "~57.0.14",
     "expo-constants": "~57.0.12",
     "expo-device": "~57.0.1",

@@ -5,7 +5,9 @@ import {
   View,
 } from "react-native";
 import MatchCard from "@/components/matching/MatchCard";
-import { matchingMockData } from "@/data/matchingMockData";
+import {
+    recommendationMockData
+} from "@/data/recommendationMockData";
 import ExpertCard from "@/components/expert/ExpertCard";
 import { expertMockData } from "@/data/expertMockData";
 
@@ -34,7 +36,7 @@ AI Matching Engine
 <View>
 
 {
-matchingMockData.map((item,index)=>(
+recommendationMockData.map((item,index)=>(
 
 <MatchCard
 
@@ -42,9 +44,9 @@ key={index}
 
 score={item.score}
 
-category={item.category}
+category={item.type}
 
-reason={item.reason}
+reason={item.reasons}
 
 />
 
@@ -63,7 +65,7 @@ reason={item.reason}
 
 
 {
-matchingMockData.map((item,index)=>(
+recommendationMockData.map((item,index)=>(
 
 <MatchCard
 

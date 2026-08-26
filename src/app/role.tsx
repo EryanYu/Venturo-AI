@@ -5,9 +5,10 @@ import {
   View,
 } from "react-native";
 import { router } from "expo-router";
-import { updateRole } from "@/store/userStore";
+import { useUser } from "@/context/UserContext";
 export default function RoleScreen(){
 
+const {updateRole}=useUser();
 
 return (
 
@@ -128,25 +129,14 @@ style={styles.role}
 
 onPress={()=>{
 
-  updateRole("企业/产业方");
+  updateRole("企业/产业合作方");
 
   router.push("/profile");
 
 }}
 
 >
-<Pressable
-style={styles.role}
-onPress={()=>{
 
-  updateRole("企业/产业方");
-
-  router.push("/profile");
-
-}}
->
-
-</Pressable>
 
 <Text style={styles.icon}>
 🏢
@@ -154,7 +144,7 @@ onPress={()=>{
 
 
 <Text style={styles.roleTitle}>
-企业/产业方
+企业/产业合作方
 </Text>
 
 

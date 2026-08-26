@@ -9,14 +9,22 @@ import AIAssistantCard from "@/components/ai/AIAssistantCard";
 import {
   aiServices
 } from "@/data/assistantMockData";
-import { getUser } from "@/store/userStore";
+import { useUser } from "@/context/UserContext";
 import {
 roleAIServices
 } from "@/data/roleAIData";
 
 export default function AIScreen(){
 
-const user = getUser();
+const { user, loading } = useUser();
+
+
+if(loading || !user){
+
+return null;
+
+}
+
 
 const services =
 roleAIServices[user.role];

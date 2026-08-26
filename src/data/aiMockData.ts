@@ -1,18 +1,30 @@
 export const aiTrends = [
 
 {
-  title:"AI Agent 智能代理",
-  description:"OpenAI 最新模型推动 AI Agent 生态发展"
+role:"创业者",
+
+title:"AI Agent 智能代理",
+
+description:
+"OpenAI 最新模型推动 AI Agent 生态发展"
 },
 
 {
-  title:"企业AI应用",
-  description:"企业正在加速部署智能助手，提高生产效率"
+role:"投资人",
+
+title:"AI基础设施投资",
+
+description:
+"算力、模型和数据基础设施成为资本关注方向"
 },
 
 {
-  title:"垂直行业AI创业",
-  description:"AI创业机会集中在垂直行业应用"
+role:"专家/顾问",
+
+title:"AI技术突破",
+
+description:
+"多模态模型、机器人视觉推动技术创新"
 }
 
 ];
@@ -22,23 +34,56 @@ export const aiTrends = [
 export const aiDirections = [
 
 {
-  category:"AI创业",
-  title:"AI Agent 智能代理"
+role:"创业者",
+
+category:"创业机会",
+
+title:"AI Agent SaaS"
 },
 
-{
-  category:"机器人",
-  title:"Robotics"
-},
 
 {
-  category:"新能源",
-  title:"Energy"
+role:"创业者",
+
+category:"商业应用",
+
+title:"企业自动化AI"
 },
 
+
 {
-  category:"智能制造",
-  title:"Industry AI"
+role:"投资人",
+
+category:"投资方向",
+
+title:"AI基础设施"
+},
+
+
+{
+role:"投资人",
+
+category:"投资方向",
+
+title:"机器人产业"
+},
+
+
+{
+role:"专家/顾问",
+
+category:"技术方向",
+
+title:"Robotics"
+},
+
+
+{
+role:"专家/顾问",
+
+category:"技术方向",
+
+title:"Computer Vision"
 }
 
 ];

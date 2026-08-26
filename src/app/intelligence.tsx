@@ -1,253 +1,85 @@
 import {
-    Pressable,
     StyleSheet,
-    Text,
     View,
 } from "react-native";
-import IntelligenceCard from "@/components/ai/IntelligenceCard";
-import InsightCard from "@/components/ai/InsightCard";
-import RecommendationCard from "@/components/ai/RecommendationCard";
-import {
-  aiTrends,
-  aiDirections,
-  aiInvestments,
-} from "@/data/aiMockData";
+import { useUser } from "@/context/UserContext";
+import {getRecommendations} from "@/services/recommendationEngine";
+import RecommendationSection from "@/components/intelligence/RecommendationSection";
+import {intelligenceMockData} from "@/data/intelligenceMockData";
+import {getIntelligenceFeed} from "@/services/intelligenceEngine";
+import IntelligenceHeader from "@/components/intelligence/IntelligenceHeader";
+import TrendSection from "@/components/intelligence/TrendSection";
+import IntelligenceFeed from "@/components/intelligence/IntelligenceFeed";
+import EcosystemSection from "@/components/intelligence/EcosystemSection";
+
 export default function IntelligenceScreen(){
 
-const trends = [
-{
- title:"AI Agent 智能代理",
- description:"OpenAI 最新模型推动 AI Agent 生态发展"
-},
+const { user, loading } = useUser();
 
-{
- title:"企业AI应用",
- description:"企业正在加速部署智能助手，提高生产效率"
-},
+if(loading || !user){
 
-{
- title:"垂直行业AI创业",
- description:"AI创业机会集中在垂直行业应用"
+return null;
+
 }
 
-];
 
-const recommendations = [
+const personalizedRecommendations =
+getRecommendations(user);
 
-{
-role:"创业者",
-title:"机器人 Robotics",
-description:"AI与机器人结合成为未来创业方向"
-},
 
-{
-role:"投资人",
-title:"AI基础设施",
-description:"模型训练、算力和基础设施持续增长"
-},
+console.log(
+"CURRENT ROLE:",
+user.role
+);
 
-{
-role:"企业/产业方",
-title:"智能制造 Industry AI",
-description:"传统产业数字化升级机会"
-}
 
-];
+const roleData =
+  intelligenceMockData.filter(
+    item => item.targetRoles.includes(user.role)
+  );
+
+
+const intelligenceFeed =
+getIntelligenceFeed(
+  roleData
+);
+
+
+const ecosystemData =
+  personalizedRecommendations.filter(
+    item => item.type==="ecosystem"
+  );
+
+
+console.log(
+"AI INTELLIGENCE FEED:",
+intelligenceFeed
+);
 
 return (
+  <View style={styles.container}>
 
-<View style={styles.container}>
+    <IntelligenceHeader />
 
+    <TrendSection
+     items={roleData}
+    />
 
-<View style={styles.header}>
+    <RecommendationSection
+      recommendations={
+        personalizedRecommendations
+      }
+    />
 
+    <IntelligenceFeed
+     items={intelligenceFeed}
+    />
 
-<Text style={styles.title}>
-AI情报中心
-</Text>
+    <EcosystemSection
+    items={ecosystemData}
+    />
 
-
-<Text style={styles.subtitle}>
-AI Innovation Intelligence
-</Text>
-
-
-</View>
-
-
-
-
-
-<View style={styles.card}>
-
-
-<Text style={styles.sectionTitle}>
-🔥 今日AI趋势
-</Text>
-
-
-{
-aiTrends.map((item,index)=>(
-
-<IntelligenceCard
-key={index}
-title={item.title}
-description={item.description}
-/>
-
-))
-}
-
-
-</View>
-
-
-
-
-
-
-
-
-<View style={styles.card}>
-
-
-<Text style={styles.sectionTitle}>
-🤖 热门创业方向
-</Text>
-
-
-{
-aiDirections.map((item,index)=>(
-
-<InsightCard
-key={index}
-category={item.category}
-title={item.title}
-/>
-
-))
-}
-
-
-<InsightCard
-category="机器人"
-title="Robotics"
-/>
-
-
-<InsightCard
-category="新能源"
-title="Energy"
-/>
-
-
-</View>
-
-
-
-
-
-
-
-
-<View style={styles.card}>
-
-
-{
-aiInvestments.map((item,index)=>(
-
-<RecommendationCard
-
-key={index}
-
-role={item.role}
-
-title={item.title}
-
-description={item.description}
-
-/>
-
-))
-}
-
-
-<RecommendationCard
-role="投资人"
-title="AI基础设施"
-description="算力、模型和数据基础设施"
-/>
-
-
-<RecommendationCard
-role="投资人"
-title="企业AI应用"
-description="AI商业落地机会"
-/>
-
-
-</View>
-
-
-
-
-
-
-
-
-
-<View style={styles.adCard}>
-
-
-<Text style={styles.adTitle}>
-企业推广
-</Text>
-
-
-<Text style={styles.adDesc}>
-发布企业动态、融资新闻，
-触达创业者和投资人。
-</Text>
-
-
-
-<Pressable style={styles.button}>
-
-
-<Text style={styles.buttonText}>
-发布商业信息
-</Text>
-
-
-</Pressable>
-
-
-</View>
-
-
-
-
-
-
-
-
-<View style={styles.points}>
-
-
-<Text style={styles.pointsText}>
-AI情报 · 每日更新
-</Text>
-
-
-</View>
-
-
-
-
-
-</View>
-
-
+  </View>
 );
 
 

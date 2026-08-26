@@ -1,21 +1,36 @@
-interface PitchEvent {
+export interface PitchSession {
 
-id:string;
 
-projectId:string;
+ id:string;
 
-founderId:string;
 
-investorIds:string[];
+ projectId:string;
 
-expertIds:string[];
 
-status:
+ founderId:string;
 
-"draft"
-|
-"scheduled"
-|
-"completed";
+
+ investorIds:string[];
+
+
+ expertIds:string[];
+
+
+ status:
+ | "draft"
+ | "scheduled"
+ | "running"
+ | "completed";
+
+
+ pitchType:
+ | "online"
+ | "offline";
+
+
+ topic:string;
+
+
+ createdAt:string;
 
 }

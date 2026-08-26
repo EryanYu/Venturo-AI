@@ -6,12 +6,13 @@ import {
 } from "react-native";
 import MatchCard from "@/components/matching/MatchCard";
 import {
- matchingMockData
-} from "@/data/matchingMockData";
+    investorRecommendationMockData
+} from "@/data/investorRecommendationMockData";
 
 export default function InvestorScreen(){
 
-const matches = matchingMockData;
+const recommendations =investorRecommendationMockData;
+
 
 return (
 
@@ -101,7 +102,32 @@ Web3
 </View>
 
 
+<View>
 
+<Text>
+🤖 AI项目发现
+</Text>
+
+
+{
+recommendations.map((item,index)=>(
+
+<MatchCard
+
+key={index}
+
+score={item.score}
+
+category={item.type}
+
+reason={item.reasons}
+
+/>
+
+))
+}
+
+</View>
 
 
 
@@ -136,14 +162,14 @@ Web3
 
 
 
-
-
 <View style={styles.card}>
 
 
 <Text style={styles.cardTitle}>
 🤖 AI推荐项目
 </Text>
+
+
 
 
 
@@ -191,37 +217,6 @@ AI创业生态平台，
 </Pressable>
 
 
-<View style={styles.section}>
-
-
-<Text style={styles.sectionTitle}>
-🤖 AI推荐投资机会
-</Text>
-
-
-{
-matches.map((item,index)=>(
-
-
-<MatchCard
-
-key={index}
-
-score={item.score}
-
-category={item.category}
-
-reason={item.reason}
-
-
-/>
-
-
-))
-}
-
-
-</View>
 
 
 

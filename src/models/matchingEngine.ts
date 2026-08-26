@@ -1,100 +1,200 @@
-import { InvestmentMatch } from "./matching";
-
-
-export interface MatchingRequest {
-
-    userId:string;
-
-    role:
-    | "创业者"
-    | "投资人"
-    | "专家/顾问"
-    | "企业/产业方";
-
-    industry?:string;
-
-    stage?:string;
-
-}
+import {
+    UserProfile
+} from "@/models/profile";
 
 
 
-export interface MatchingResult {
+export interface MatchResult {
 
-    matchId:string;
 
     targetId:string;
 
-    targetType:
-    | "project"
-    | "investor"
-    | "expert";
 
     score:number;
 
-    reason:string;
+
+    reasons:string[];
+
 
 }
 
 
 
+
+
+/**
+ * 计算标签匹配数量
+ */
+function calculateTagMatch(
+    sourceTags:string[],
+    targetTags:string[]
+):number{
+
+
+    const intersection =
+        sourceTags.filter(tag =>
+            targetTags.includes(tag)
+        );
+
+
+    return intersection.length;
+
+}
+
+
+
+
+
+/**
+ * Venturo AI Matching Engine V2.1
+ *
+ * Founder
+ * Investor
+ * Expert
+ * Enterprise
+ *
+ * 多维度评分
+ */
 export function calculateMatchScore(
-    request:MatchingRequest
-){
+    source:UserProfile,
+    target:UserProfile
+):MatchResult{
 
-    let score = 70;
 
 
-    if(request.industry){
+    let score = 0;
 
-        score += 10;
+
+
+    const reasons:string[] = [];
+
+
+
+
+    // 1.赛道匹配 40%
+    const trackScore =
+        calculateTagMatch(
+            source.trackTags,
+            target.trackTags
+        );
+
+
+    if(trackScore > 0){
+
+        score += 40;
+
+        reasons.push(
+            "赛道方向高度匹配"
+        );
 
     }
 
 
-    if(request.stage){
 
-        score += 10;
+
+    // 2.需求/能力匹配 30%
+    const needScore =
+        calculateTagMatch(
+            source.needTags,
+            target.skillTags
+        );
+
+
+
+    if(needScore > 0){
+
+        score += 30;
+
+        reasons.push(
+            "资源能力匹配"
+        );
 
     }
 
 
-    return Math.min(score,100);
+
+
+    // 3.地区匹配 15%
+
+    if(
+        source.city === target.city
+    ){
+
+        score +=15;
+
+        reasons.push(
+            "同城市生态连接"
+        );
+
+    }
+
+
+
+
+    // 4.行业匹配 15%
+
+    if(
+        source.industry === target.industry
+    ){
+
+        score +=15;
+
+        reasons.push(
+            "行业方向一致"
+        );
+
+    }
+
+
+
+
+    return {
+
+
+        targetId:
+        target.id,
+
+
+        score,
+
+
+        reasons
+
+
+    };
+
 
 }
 
 
 
-export function generateMatchingReason(
-    role:string
-){
-
-    switch(role){
-
-        case "创业者":
-
-            return "根据项目方向匹配投资人和行业专家";
 
 
-        case "投资人":
 
-            return "根据投资偏好发现优质创业项目";
-
-
-        case "专家/顾问":
-
-            return "根据技术领域匹配创业团队和企业需求";
-
-
-        case "企业/产业方":
-
-            return "根据产业方向匹配创新项目";
+/**
+ * 批量生成推荐
+ */
+export function generateRecommendations(
+    source:UserProfile,
+    targets:UserProfile[]
+):MatchResult[]{
 
 
-        default:
 
-            return "AI智能匹配";
+    return targets
 
-    }
+        .map(target =>
+            calculateMatchScore(
+                source,
+                target
+            )
+        )
+
+
+        .sort(
+            (a,b)=>
+            b.score-a.score
+        );
+
 
 }
