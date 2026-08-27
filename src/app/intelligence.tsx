@@ -11,21 +11,44 @@ import IntelligenceHeader from "@/components/intelligence/IntelligenceHeader";
 import TrendSection from "@/components/intelligence/TrendSection";
 import IntelligenceFeed from "@/components/intelligence/IntelligenceFeed";
 import EcosystemSection from "@/components/intelligence/EcosystemSection";
+import {allProfilesMock} from "@/data/allProfilesMockData";
+import {generateProfileRecommendations} from "@/services/profileRecommendationEngine";
+import ProfileRecommendationSection from "@/components/intelligence/ProfileRecommendationSection";
 
 export default function IntelligenceScreen(){
 
 const { user, loading } = useUser();
 
+
 if(loading || !user){
-
-return null;
-
+ return null;
 }
+
+
+const currentProfile =
+allProfilesMock.find(
+ item =>
+ item.userId === user.id
+);
 
 
 const personalizedRecommendations =
 getRecommendations(user);
 
+const profileRecommendations =
+currentProfile
+?
+generateProfileRecommendations(
+currentProfile,
+allProfilesMock
+)
+:
+[];
+
+console.log(
+"PROFILE MATCHING:",
+profileRecommendations
+);
 
 console.log(
 "CURRENT ROLE:",
@@ -59,6 +82,10 @@ intelligenceFeed
 
 return (
   <View style={styles.container}>
+
+<ProfileRecommendationSection
+items={profileRecommendations}
+/>
 
     <IntelligenceHeader
      role={user.role}
