@@ -14,13 +14,19 @@ export const investorRecommendationMockData: Recommendation[] = [
 
  title:"AI创业项目推荐",
 
+ description:
+"AI根据投资方向生成项目推荐",
+
  score:94,
 
  reasons:[
    "投资方向匹配",
    "AI赛道匹配",
    "早期项目阶段匹配"
- ]
+ ],
+
+ createdAt:
+"2026-08-27"
 
 }
 

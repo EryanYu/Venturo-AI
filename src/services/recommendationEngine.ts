@@ -18,10 +18,25 @@ aiRecommendationMockData
  item.targetRoles.includes(user.role)
 )
 .sort(
-(a,b)=>
-(b.priority || 0)
+(a,b)=>{
+
+const priorityMap:any={
+
+high:3,
+
+medium:2,
+
+low:1
+
+};
+
+return (
+priorityMap[b.priority || "low"]
 -
-(a.priority || 0)
+priorityMap[a.priority || "low"]
+);
+
+}
 );
 
 

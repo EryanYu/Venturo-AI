@@ -1,7 +1,7 @@
-import { Expert } from "@/models/expert";
+import {ExpertRecommendation} from "@/models/expertRecommendation";
 
 
-export const expertMockData:Expert[] = [
+export const expertMockData:ExpertRecommendation[] = [
 
 
 {
@@ -11,8 +11,9 @@ name:"AI算法专家",
 
 field:"AI",
 
-expertise:
-"大模型、Agent系统设计",
+expertise:[
+"大模型、Agent系统设计"
+],
 
 experience:
 "10年AI研发经验",
@@ -32,8 +33,9 @@ name:"智能制造专家",
 
 field:"智能制造",
 
-expertise:
-"工业AI应用",
+expertise:[
+"工业AI应用"
+],
 
 experience:
 "制造业数字化转型",

@@ -38,7 +38,10 @@ const defaultUser:User = {
 
   points:1000,
 
-  aiLevel:80
+  aiLevel:80,
+
+  createdAt:
+  "2026-08-27"
 
 };
 

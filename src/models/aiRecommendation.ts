@@ -39,11 +39,7 @@ export interface AIUserRecommendation {
   /**
    * 推荐角色
    */
-  targetRole:
-  | "创业者"
-  | "投资人"
-  | "专家/顾问"
-  | "企业/产业合作方";
+  targetRoles:string[];
 
 
 
@@ -85,10 +81,11 @@ export interface AIUserRecommendation {
    * 用户行为入口
    */
   actionType?:
-  | "learn"
-  | "contact"
-  | "apply"
-  | "invest";
+| "learn"
+| "contact"
+| "apply"
+| "invest"
+| "connect";
 
 
 

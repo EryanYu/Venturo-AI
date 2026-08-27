@@ -45,6 +45,13 @@ export interface UserProfile {
     skillTags:string[];
 
 
+    // 希望匹配的生态角色
+    seekingRoles:string[];
+
+
+    // 用户拥有的资源
+    resources:string[];
+
 
     description:string;
 

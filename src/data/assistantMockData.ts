@@ -1,3 +1,59 @@
+export interface AIUserRecommendation {
+
+id:string;
+
+type:
+| "opportunity"
+| "intelligence"
+| "ecosystem";
+
+
+targetRoles:string[];
+
+
+title:string;
+
+
+description:string;
+
+
+category:string;
+
+
+reason:string;
+
+
+relatedTags:string[];
+
+
+priority:string;
+
+
+industry:string;
+
+
+actionType:
+| "apply"
+| "invest"
+| "contact";
+
+
+source?:string;
+
+
+relatedProjects?:string[];
+
+relatedInvestors?:string[];
+
+relatedExperts?:string[];
+
+relatedCompanies?:string[];
+
+createdAt:string;
+
+}
+
+
 export const aiServices = [
 
 {
@@ -21,27 +77,5 @@ description:"优化商业计划书，提高融资成功率。",
 points:80
 },
 
-{
-id:"ai_rec_001",
-
-targetRole:"创业者",
-
-title:"AI Agent SaaS创业机会",
-
-...
-
-relatedProjects:[
-"project_001"
-],
-
-relatedInvestors:[
-"investor_001"
-],
-
-relatedExperts:[
-"expert_001"
-]
-
-}
 
 ];

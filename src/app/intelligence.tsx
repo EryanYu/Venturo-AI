@@ -41,7 +41,8 @@ const roleData =
 
 const intelligenceFeed =
 getIntelligenceFeed(
-  roleData
+ intelligenceMockData,
+ user.role
 );
 
 
@@ -59,7 +60,9 @@ intelligenceFeed
 return (
   <View style={styles.container}>
 
-    <IntelligenceHeader />
+    <IntelligenceHeader
+     role={user.role}
+    />
 
     <TrendSection
      items={roleData}

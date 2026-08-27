@@ -24,6 +24,9 @@ if(!globalThis.__VENTURO_USER__){
 
     aiLevel:80,
 
+    createdAt:
+    "2026-08-27",
+
   };
 
 }

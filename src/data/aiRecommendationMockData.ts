@@ -15,6 +15,18 @@ targetRoles:["创业者"],
 
 title:"AI Agent SaaS创业机会",
 
+relatedProjects:[
+"project_001"
+],
+
+relatedInvestors:[
+"investor_001"
+],
+
+relatedExperts:[
+"expert_001"
+],
+
 description:
 "企业级AI Agent正在快速落地，垂直行业SaaS成为创业热点。",
 
@@ -182,6 +194,12 @@ relatedCompanies:[
 "投资机构"
 ],
 
+relatedTags:[
+ "生态合作",
+ "AI应用",
+ "产业升级"
+],
+
 createdAt:
 "2026-08-24",
 
@@ -222,6 +240,13 @@ relatedCompanies:[
 "产业资本"
 ],
 
+
+relatedTags:[
+ "AI投资",
+ "产业资本",
+ "生态合作"
+],
+
 createdAt:
 "2026-08-24",
 
@@ -229,6 +254,8 @@ priority:
 "high"
 
 }
+
+
 
 
 ];

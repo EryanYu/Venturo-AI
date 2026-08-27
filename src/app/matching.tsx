@@ -44,7 +44,7 @@ key={index}
 
 score={item.score}
 
-category={item.type}
+category={item.category}
 
 reason={item.reasons}
 
@@ -73,9 +73,7 @@ key={index}
 
 score={item.score}
 
-category={item.category}
-
-reason={item.reason}
+reason={item.reasons}
 
 />
 

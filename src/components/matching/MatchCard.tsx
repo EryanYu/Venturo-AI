@@ -5,11 +5,11 @@ import {
 } from "react-native";
 
 
-interface MatchCardProps {
+interface Props {
 
   score:number;
 
-  category:string;
+  category?:string;
 
   reason:string[];
 

@@ -13,6 +13,9 @@ export interface ExpertProfile {
  | "专家/顾问";
 
 
+ field:string;
+
+
  avatar?:string;
 
 
@@ -26,9 +29,25 @@ export interface ExpertProfile {
  expertise:string[];
 
 
+// 经历
+
+ experience:string;
+
+
  // 技能标签
 
  skillTags:string[];
+
+
+ // 可参与方向
+
+ availableFor:string;
+
+
+// 专家评分
+
+ score:number;
+
 
 
  // 专家背景

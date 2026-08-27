@@ -1,5 +1,11 @@
 import { ROLES } from "@/constants/role";
 
+export type UserRole =
+| "创业者"
+| "投资人"
+| "专家/顾问"
+| "企业/产业合作方";
+
 
 export interface User {
 

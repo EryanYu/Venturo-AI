@@ -67,6 +67,28 @@ export const founderProfileMock:FounderProfile = {
     ],
 
 
+     seekingRoles:[
+
+    "投资人",
+
+    "专家/顾问",
+
+    "企业/产业合作方"
+
+    ],
+
+
+    resources:[
+
+    "AI产品经验",
+
+    "创业团队",
+
+    "商业模式设计"
+
+    ],
+
+
 
     description:
 
@@ -152,6 +174,25 @@ export const investorProfileMock:InvestorProfile = {
         "投资分析",
 
         "行业研究"
+
+    ],
+
+
+
+    seekingRoles:[
+
+    "创业者"
+
+    ],
+
+
+    resources:[
+
+    "资金",
+
+    "投资经验",
+
+    "产业资源"
 
     ],
 
@@ -254,6 +295,26 @@ export const expertProfileMock:ExpertProfile = {
 
         "机器学习"
 
+    ],
+
+
+    seekingRoles:[
+
+    "创业者",
+
+    "企业/产业合作方"
+
+    ],
+
+
+    resources:[
+
+    "AI技术能力",
+
+    "算法经验",
+
+    "项目评估能力"
+    
     ],
 
 
@@ -362,6 +423,26 @@ export const enterpriseProfileMock:EnterpriseProfile = {
         "产业资源",
 
         "供应链"
+
+    ],
+
+
+    seekingRoles:[
+
+    "创业者",
+
+    "专家/顾问"
+    
+    ],
+
+
+    resources:[
+
+    "产业场景",
+
+    "供应链资源",
+
+    "商业渠道"
 
     ],
 

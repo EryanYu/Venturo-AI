@@ -34,6 +34,10 @@ export interface Recommendation {
 
 
 
+    category?:string;
+
+    
+
     score:number;
 
 
