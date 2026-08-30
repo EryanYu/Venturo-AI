@@ -27,6 +27,25 @@ fundingAmount:"500万人民币",
 
 aiScore:86,
 
+trackTags:[
+  "AI Agent",
+  "企业SaaS",
+  "创业服务"
+],
+
+needTags:[
+  "融资",
+  "商业模式",
+  "AI产品"
+],
+
+resourceNeeds:[
+  "投资人",
+  "AI专家",
+  "企业客户"
+],
+
+
 createdAt:"2026-08-22"
 
 },
@@ -55,6 +74,25 @@ fundingStatus:"融资中",
 fundingAmount:"1000万人民币",
 
 aiScore:91,
+
+trackTags:[
+  "AI机器人",
+  "工业机器人",
+  "智能制造"
+],
+
+needTags:[
+  "融资",
+  "机器人研发",
+  "产业合作"
+],
+
+resourceNeeds:[
+  "投资人",
+  "机器人专家",
+  "产业企业"
+],
+
 
 createdAt:"2026-08-22"
 

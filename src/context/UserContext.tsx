@@ -16,14 +16,26 @@ import {
   ROLES
 } from "@/constants/role";
 
+import {
+loadProfile,
+saveProfile
+} from "@/services/profileRepository";
+
+import {
+UserProfile
+} from "@/models/profile";
 
 interface UserContextType {
 
-  user: User | null;
+user: User | null;
 
-  updateRole:(role:UserRole)=>void;
+profile: UserProfile | null;
 
-  loading:boolean;
+updateRole:(role:UserRole)=>void;
+
+updateProfile:(profile:UserProfile)=>void;
+
+loading:boolean;
 
 }
 
@@ -66,7 +78,8 @@ export function UserProvider({
   const [loading,setLoading] =
   useState(true);
 
-
+  const [profile,setProfile] =
+  useState<UserProfile | null>(null);
 
   useEffect(()=>{
 
@@ -82,20 +95,28 @@ export function UserProvider({
 
 
 
-        if(data){
+       if(data){
 
-          setUser(
-            JSON.parse(data)
-          );
+        const loadedUser =
+         JSON.parse(data) as User;
 
+       setUser(loadedUser);
 
-        }else{
+        const loadedProfile =
+       await loadProfile(loadedUser.id);
 
+       setProfile(loadedProfile);
 
-          setUser(defaultUser);
+       }else{
 
+       setUser(defaultUser);
 
-        }
+        const loadedProfile =
+       await loadProfile(defaultUser.id);
+
+       setProfile(loadedProfile);
+
+      }
 
 
       }catch(error){
@@ -108,7 +129,8 @@ export function UserProvider({
 
 
         setUser(defaultUser);
-
+        
+        setProfile(null);
 
       }finally{
 
@@ -167,7 +189,23 @@ export function UserProvider({
 
   }
 
+  function updateProfile(profile: UserProfile) {
+  const currentUser = user ?? defaultUser;
 
+  const normalizedProfile: UserProfile = {
+    ...profile,
+    userId: currentUser.id,
+  };
+
+  setProfile(normalizedProfile);
+
+  saveProfile(normalizedProfile);
+
+  console.log(
+    "UPDATE PROFILE:",
+    normalizedProfile.id
+  );
+}
 
 
 
@@ -177,13 +215,17 @@ export function UserProvider({
 
       value={{
 
-        user,
+      user,
 
-        updateRole,
+      profile,
 
-        loading
+      updateRole,
 
-      }}
+      updateProfile,
+
+      loading
+
+     }}
 
     >
 

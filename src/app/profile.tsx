@@ -11,8 +11,10 @@ import InvestorDashboard from "@/components/dashboard/InvestorDashboard";
 import ExpertDashboard from "@/components/dashboard/ExpertDashboard";
 import EnterpriseDashboard from "@/components/dashboard/EnterpriseDashboard";
 import {ROLE_MAPPING} from "@/constants/roleMapping";
-export default function ProfileScreen(){
+import { useRouter } from "expo-router";
 
+export default function ProfileScreen(){
+const router = useRouter();
 const { user, loading } = useUser();
 
 
@@ -66,7 +68,14 @@ const roleTitle =
         
       </View>
 
-
+      <Pressable
+      style={styles.editButton}
+      onPress={() => router.push("/profile-edit")}
+      >
+      <Text style={styles.editButtonText}>
+      编辑个人资料
+      </Text>
+      </Pressable>
 
       {/* Dashboard */}
 
@@ -134,7 +143,21 @@ header:{
 
 },
 
+editButton: {
+  marginTop: 12,
+  marginBottom: 20,
+  paddingHorizontal: 18,
+  paddingVertical: 12,
+  borderRadius: 20,
+  backgroundColor: "#ff0000",
+  alignSelf: "center",
+},
 
+editButtonText: {
+  color: "#fff",
+  fontSize: 14,
+  fontWeight: "600",
+},
 
 avatar:{
 

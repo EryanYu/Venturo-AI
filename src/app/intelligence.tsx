@@ -1,19 +1,23 @@
 import {
-    StyleSheet,
-    View,
+  StyleSheet,
+  View,
 } from "react-native";
-import { useUser } from "@/context/UserContext";
-import {getRecommendations} from "@/services/recommendationEngine";
-import RecommendationSection from "@/components/intelligence/RecommendationSection";
-import {intelligenceMockData} from "@/data/intelligenceMockData";
-import {getIntelligenceFeed} from "@/services/intelligenceEngine";
+
+import {useUser} from "@/context/UserContext";
+
+import {
+  getIntelligenceFeed,
+  getDailyInsights,
+  getFounderOpportunities,
+  getInvestorOpportunities,
+} from "@/services/intelligenceEngine";
+
 import IntelligenceHeader from "@/components/intelligence/IntelligenceHeader";
 import TrendSection from "@/components/intelligence/TrendSection";
 import IntelligenceFeed from "@/components/intelligence/IntelligenceFeed";
-import EcosystemSection from "@/components/intelligence/EcosystemSection";
-import {allProfilesMock} from "@/data/allProfilesMockData";
-import {generateProfileRecommendations} from "@/services/profileRecommendationEngine";
-import ProfileRecommendationSection from "@/components/intelligence/ProfileRecommendationSection";
+import DailyInsightSection from "@/components/intelligence/DailyInsightSection";
+import FounderOpportunitySection from "@/components/intelligence/FounderOpportunitySection";
+import InvestorOpportunitySection from "@/components/intelligence/InvestorOpportunitySection";
 
 export default function IntelligenceScreen(){
 
@@ -24,89 +28,43 @@ if(loading || !user){
  return null;
 }
 
-
-const currentProfile =
-allProfilesMock.find(
- item =>
- item.userId === user.id
-);
-
-
-const personalizedRecommendations =
-getRecommendations(user);
-
-const profileRecommendations =
-currentProfile
-?
-generateProfileRecommendations(
-currentProfile,
-allProfilesMock
-)
-:
-[];
-
-console.log(
-"PROFILE MATCHING:",
-profileRecommendations
-);
-
-console.log(
-"CURRENT ROLE:",
-user.role
-);
-
-
-const roleData =
-  intelligenceMockData.filter(
-    item => item.targetRoles.includes(user.role)
-  );
-
-
 const intelligenceFeed =
-getIntelligenceFeed(
- intelligenceMockData,
- user.role
-);
-
-
-const ecosystemData =
-  personalizedRecommendations.filter(
-    item => item.type==="ecosystem"
+  getIntelligenceFeed(
+    user.role
   );
 
+const dailyInsights =
+  getDailyInsights(
+    user.role
+  );
 
-console.log(
-"AI INTELLIGENCE FEED:",
-intelligenceFeed
-);
+const founderOpportunities =
+  getFounderOpportunities(
+    user.role
+  );
+
+const investorOpportunities =
+  getInvestorOpportunities(
+    user.role
+  );
 
 return (
   <View style={styles.container}>
 
-<ProfileRecommendationSection
-items={profileRecommendations}
-/>
-
     <IntelligenceHeader
-     role={user.role}
+      role={user.role}
     />
 
-    <TrendSection
-     items={roleData}
+    <DailyInsightSection
+      items={dailyInsights}
     />
 
-    <RecommendationSection
-      recommendations={
-        personalizedRecommendations
-      }
+    <FounderOpportunitySection
+      items={founderOpportunities}
     />
 
-    <IntelligenceFeed
-     items={intelligenceFeed}
-    />
-
-    <EcosystemSection
-    items={ecosystemData}
+    <InvestorOpportunitySection
+      items={investorOpportunities}
     />
 
   </View>

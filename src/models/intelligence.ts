@@ -1,70 +1,57 @@
 export type IntelligenceType =
-  | "trend"
+  | "insight"
   | "opportunity"
-  | "project"
-  | "business"
-  | "funding";
+  | "founder_opportunity"
+  | "investor_opportunity"
+  | "funding"
+  | "trend"
+  | "business";
 
-
-export type IntelligenceActionType =
-  | "follow"
-  | "apply"
-  | "invest"
-  | "contact";
-
-
-export interface IntelligenceItem {
-
-
-  id:string;
-
-
-  type:IntelligenceType;
-
-
-  title:string;
-
-
-  description:string;
-
-
-  category:string;
-
-
-  industry:string;
-
-
-  priority:
+export type IntelligencePriority =
   | "high"
   | "medium"
   | "low";
 
 
+export interface IntelligenceItem {
+
+  id:string;
+
+  type:IntelligenceType;
+
   targetRoles:string[];
 
+  title:string;
 
-  actionType:IntelligenceActionType;
+  description:string;
 
+  category:string;
 
+  reason:string;
 
-  reason?:string;
-
-
-
-  relatedTags?:string[];
-
-
+  relatedTags:string[];
 
   relatedCompanies?:string[];
 
+  relatedProjects?:string[];
 
+  relatedInvestors?:string[];
+  
+  relatedExperts?:string[];
 
-  createdAt:string;
+  priority:IntelligencePriority;
 
+  industry?:string;
 
+  actionType?:
+  | "learn"
+  | "view"
+  | "apply"
+  | "invest"
+  | "contact";
 
   source?:string;
 
-
+  createdAt:string;
 
 }

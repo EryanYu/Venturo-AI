@@ -1,58 +1,56 @@
 import {
- IntelligenceItem
+  IntelligenceItem
 } from "@/models/intelligence";
 
+import {
+  intelligenceCenterMockData
+} from "@/data/intelligenceCenterMockData";
 
 
 export function getIntelligenceFeed(
+  role:string
+):IntelligenceItem[] {
 
- items:IntelligenceItem[],
-
- role:string
-
-){
-
-
-
- return items
-
- .filter(
-
- item =>
-
- item.targetRoles.includes(role)
-
- )
+  return intelligenceCenterMockData
+    .filter(
+      item =>
+        item.targetRoles.includes(role)
+        || item.targetRoles.length === 0
+    );
+}
 
 
- .sort(
+export function getFounderOpportunities(
+  role:string
+):IntelligenceItem[] {
 
- (a,b)=>{
-
- const priorityMap={
-
- high:3,
-
- medium:2,
-
- low:1
-
- };
+  return getIntelligenceFeed(role)
+    .filter(
+      item =>
+        item.type === "founder_opportunity"
+    );
+}
 
 
- return (
+export function getInvestorOpportunities(
+  role:string
+):IntelligenceItem[] {
 
- priorityMap[b.priority]
-
- -
-
- priorityMap[a.priority]
-
- );
-
- }
-
- );
+  return getIntelligenceFeed(role)
+    .filter(
+      item =>
+        item.type === "investor_opportunity"
+    );
+}
 
 
+export function getDailyInsights(
+  role:string
+):IntelligenceItem[] {
+
+  return getIntelligenceFeed(role)
+    .filter(
+      item =>
+        item.type === "insight"
+    );
 }

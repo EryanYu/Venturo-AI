@@ -5,13 +5,32 @@ import {
   View,
 } from "react-native";
 import ProjectCard from "@/components/project/ProjectCard";
-import {
- projectMockData
-} from "@/data/projectMockData";
+import {projectMockData} from "@/data/projectMockData";
+import ProjectMatchSection from "@/components/project/ProjectMatchSection";
+import {generateProjectMatches,} from "@/services/projectMatchingEngine";
 
 export default function ProjectScreen(){
 
 const projects = projectMockData;
+
+const currentProject = projectMockData[0];
+
+const projectMatches =
+  generateProjectMatches(
+    currentProject,
+    [
+      "投资人",
+      "专家/顾问",
+      "企业/产业合作方",
+    ]
+  );
+
+
+
+console.log(
+  "PROJECT MATCHING:",
+  projectMatches
+);
 
   return (
 
@@ -240,6 +259,9 @@ const projects = projectMockData;
 
       </Pressable>
 
+      <ProjectMatchSection
+       matches={projectMatches}
+      />
 
     <View style={styles.section}>
 

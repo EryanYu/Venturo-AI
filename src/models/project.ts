@@ -15,6 +15,12 @@ export interface Project {
   // 行业方向
   industry:string;
 
+  trackTags?: string[];
+
+  needTags?: string[];
+
+  resourceNeeds?: string[];
+
 
   // 项目阶段
   stage:
