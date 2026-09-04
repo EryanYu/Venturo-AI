@@ -145,6 +145,50 @@ IntelligenceItem[] = [
     source:"Venturo AI Intelligence",
 
     createdAt:"2026-08-27"
+  },
+
+  {
+  id:"collaboration_001",
+
+  type:"collaboration",
+
+  targetRoles:[
+    "创业者",
+    "投资人",
+    "专家/顾问",
+    "企业/产业合作方"
+    ],
+
+  title:"企业级 AI Agent 解决方案正在加速落地",
+
+  description:
+    "某企业正在面向企业客户提供 AI Agent 与业务自动化解决方案，关注企业智能化升级与实际业务场景落地。",
+
+  category:"品牌合作",
+
+  reason:
+    "这是经 Venturo AI 平台审核发布的合作内容。",
+
+  relatedTags:[
+    "AI Agent",
+    "Enterprise AI",
+    "Automation"
+    ],
+
+  relatedCompanies:[
+    "合作企业"
+    ],
+
+  priority:"medium",
+
+  industry:"Enterprise AI",
+
+  actionType:"view",
+
+  source:"Venturo AI Collaboration",
+
+  createdAt:"2026-09-01"
   }
+
 
 ];

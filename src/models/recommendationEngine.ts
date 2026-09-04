@@ -1,99 +1,104 @@
 import {
-    calculateMatchScore
-} from "@/models/matchingEngine";
-
-
-import {
-    Recommendation
-} from "@/models/recommendation";
-
+  aiRecommendationMockData,
+} from "@/data/aiRecommendationMockData";
 
 import {
-    UserProfile
-} from "@/models/profile";
+  User,
+} from "@/models/user";
 
+import {
+  getBehaviorEvents,
+} from "@/services/behaviorTracker";
 
+export function getRecommendations(
+  user: User
+) {
 
+  const events =
+    getBehaviorEvents()
+      .filter(
+        event =>
+          event.userId === user.id
+      );
 
+  const priorityMap: Record<
+    string,
+    number
+  > = {
+    high: 30,
+    medium: 20,
+    low: 10,
+  };
 
-export function generateRecommendations(
+  const recommendations =
+    aiRecommendationMockData
+      .filter(
+        item =>
+          item.targetRoles.includes(
+            user.role
+          )
+      )
+      .map(item => {
 
+        let score =
+          priorityMap[
+            item.priority || "low"
+          ];
 
-    source:UserProfile,
+        for (const event of events) {
 
+          if (
+            event.type ===
+            "view_project" &&
+            item.relatedProjects?.includes(
+              event.targetId
+            )
+          ) {
+            score += 8;
+          }
 
-    targets:UserProfile[]
+          if (
+            event.type ===
+            "view_profile" &&
+            item.relatedInvestors?.includes(
+              event.targetId
+            )
+          ) {
+            score += 10;
+          }
 
+          if (
+            event.type ===
+            "view_profile" &&
+            item.relatedExperts?.includes(
+              event.targetId
+            )
+          ) {
+            score += 10;
+          }
 
-):Recommendation[]{
-
-
-
-    return targets.map(
-        target=>{
-
-
-            const result =
-            calculateMatchScore(
-                source,
-                target
-            );
-
-
-
-            return {
-
-
-                id:
-                `${source.id}_${target.id}`,
-
-
-                type:
-                "project",
-
-
-
-                sourceId:
-                source.id,
-
-
-
-                targetId:
-                target.id,
-
-
-
-                title:
-                `推荐 ${target.name}`,
-
-
-
-                description:
-                "AI根据用户画像和标签生成推荐",
-
-
-
-                score:
-                result.score,
-
-
-
-                reasons:
-                result.reasons,
-
-
-
-                createdAt:
-                new Date()
-                .toISOString()
-
-
-            };
-
-
+          if (
+            event.type ===
+            "view_intelligence" &&
+            item.relatedTags?.includes(
+              event.targetId
+            )
+          ) {
+            score += 5;
+          }
         }
 
-    );
+        return {
+          item,
+          score,
+        };
+      })
+      .sort(
+        (a, b) =>
+          b.score - a.score
+      );
 
-
+  return recommendations.map(
+    result => result.item
+  );
 }

@@ -25,7 +25,7 @@ interface Props {
 
 function splitTags(value: string): string[] {
   return value
-    .split(/[，,]/)
+    .split(/[，,、]/)
     .map(item => item.trim())
     .filter(Boolean);
 }

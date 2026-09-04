@@ -1,6 +1,7 @@
 import {
   View,
   Text,
+  Pressable,
 } from "react-native";
 
 import {
@@ -8,16 +9,16 @@ import {
 } from "@/models/intelligence";
 
 
-interface Props{
-
-  items:IntelligenceItem[];
-
+interface Props {
+  items: IntelligenceItem[];
+  onPress?: (item: IntelligenceItem) => void;
 }
 
 
 export default function DailyInsightSection({
-  items
-}:Props){
+  items,
+  onPress,
+}: Props) {
 
 
   return (
@@ -40,15 +41,16 @@ export default function DailyInsightSection({
         items.map(
           (item,index)=>(
 
-            <View
-              key={item.id || index}
-              style={{
-                backgroundColor:"#111827",
-                padding:16,
-                borderRadius:12,
-                marginBottom:12
-              }}
-            >
+            <Pressable
+             key={item.id || index}
+             onPress={() => onPress?.(item)}
+             style={{
+               backgroundColor:"#111827",
+               padding:16,
+               borderRadius:12,
+               marginBottom:12
+      }}
+             >
 
               <Text
                 style={{
@@ -70,7 +72,7 @@ export default function DailyInsightSection({
                 {item.description}
               </Text>
 
-            </View>
+            </Pressable>
 
           )
         )

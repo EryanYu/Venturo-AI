@@ -5,7 +5,7 @@ export const projectMockData:Project[] = [
 
 
 {
-id:"001",
+id: "project_001",
 
 name:"AI智能创业助手",
 
@@ -42,7 +42,7 @@ needTags:[
 resourceNeeds:[
   "投资人",
   "AI专家",
-  "企业客户"
+  "企业/产业合作方"
 ],
 
 
@@ -53,7 +53,7 @@ createdAt:"2026-08-22"
 
 
 {
-id:"002",
+id: "project_002",
 
 name:"智能机器人平台",
 
@@ -90,7 +90,7 @@ needTags:[
 resourceNeeds:[
   "投资人",
   "机器人专家",
-  "产业企业"
+  "企业/产业合作方"
 ],
 
 

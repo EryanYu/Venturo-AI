@@ -59,9 +59,9 @@ export function calculateProjectProfileMatch(
 
   // 4. 项目资源需求 ↔ 用户角色匹配
   const roleMatch =
-    project.resourceNeeds?.filter(resource =>
-      profile.seekingRoles.includes(resource)
-    ) ?? [];
+  project.resourceNeeds?.filter(
+    resource => resource === profile.role
+  ) ?? [];
 
   if (roleMatch.length > 0) {
     score += Math.min(roleMatch.length * 10, 20);

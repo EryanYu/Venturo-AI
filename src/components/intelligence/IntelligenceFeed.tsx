@@ -1,19 +1,20 @@
 import {
   View,
-  Text
+  Text,
+  Pressable
 } from "react-native";
 
 
-interface Props{
-
-items:any[];
-
+interface Props {
+  items: any[];
+  onPress?: (item: any) => void;
 }
 
 
 export default function IntelligenceFeed({
-items
-}:Props){
+  items,
+  onPress,
+}: Props) {
 
 
 return (
@@ -25,15 +26,28 @@ return (
 items.map(
 (item,index)=>(
 
-<View
-key={index}
-style={{
-backgroundColor:"#111827",
-padding:16,
-borderRadius:12,
-marginBottom:12
-}}
+<Pressable
+  key={index}
+  onPress={() => onPress?.(item)}
+  style={{
+    backgroundColor:"#111827",
+    padding:16,
+    borderRadius:12,
+    marginBottom:12
+  }}
 >
+
+{item.type === "collaboration" && (
+  <Text
+    style={{
+      color:"#8fa3ff",
+      fontSize:12,
+      marginBottom:6
+    }}
+  >
+    ◇ 品牌合作
+  </Text>
+)}
 
 
 <Text
@@ -57,7 +71,7 @@ marginTop:8
 </Text>
 
 
-</View>
+</Pressable>
 
 )
 

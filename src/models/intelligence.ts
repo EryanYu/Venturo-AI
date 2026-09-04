@@ -1,11 +1,12 @@
 export type IntelligenceType =
-  | "insight"
-  | "opportunity"
-  | "founder_opportunity"
-  | "investor_opportunity"
-  | "funding"
-  | "trend"
-  | "business";
+| "insight"
+| "opportunity"
+| "founder_opportunity"
+| "investor_opportunity"
+| "funding"
+| "trend"
+| "business"
+| "collaboration";
 
 export type IntelligencePriority =
   | "high"

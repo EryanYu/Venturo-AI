@@ -17,10 +17,15 @@ export default function ProfileEditScreen() {
     return null;
   }
 
-  function handleSave(nextProfile: Parameters<typeof updateProfile>[0]) {
-    updateProfile(nextProfile);
+  function handleSave(
+  nextProfile: Parameters<typeof updateProfile>[0]
+) {
+  updateProfile(nextProfile);
+
+  if (router.canGoBack()) {
     router.back();
   }
+}
 
   return (
     <ProfileEditor
