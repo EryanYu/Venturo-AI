@@ -1,6 +1,6 @@
 import { aiRecommendationMockData } from "@/data/aiRecommendationMockData";
 import { User } from "@/models/user";
-import {UserInterestProfile,} from "@/services/userInterestProfile";
+import { UserInterestProfile } from "@/models/interest";
 import { getBehaviorEvents } from "@/services/behaviorTracker";
 
 

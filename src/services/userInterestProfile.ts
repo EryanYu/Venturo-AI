@@ -5,13 +5,11 @@ import {
   trackBehavior
 } from "@/services/behaviorTracker";
 
-export interface UserInterestProfile {
-  userId: string;
-  interests: {
-    tag: string;
-    score: number;
-  }[];
-}
+import {
+  UserInterestProfile,
+  IntentSignal
+} from "@/models/interest";
+
 
 export function buildUserInterestProfile(
   userId: string
@@ -47,18 +45,32 @@ const behaviorWeights: Record<BehaviorEventType, number> = {
 
 
   const interests = Array.from(tagScores.entries())
-    .map(([tag, score]) => ({
-      tag,
-      score,
-    }))
-    .sort((a, b) => b.score - a.score);
+  .map(([tag, score]) => ({
+    tag,
+    score,
+  }))
+  .sort((a, b) => b.score - a.score);
 
+const intentSignals: IntentSignal[] = behaviorEvents
+  .filter(
+    (event: BehaviorEvent) =>
+      event.userId === userId &&
+      event.type === "connection_intent"
+  )
+  .map(event => ({
+    userId: event.userId,
+    type: "connection_intent",
+    targetId: event.targetId,
+    tags: event.tags,
+    timestamp: event.timestamp,
+    strength: behaviorWeights[event.type],
+  }));
 
-
-  return {
-    userId,
-    interests,
-  };
+return {
+  userId,
+  interests,
+  intentSignals,
+};
 }
 
 
