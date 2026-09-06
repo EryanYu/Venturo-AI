@@ -1,6 +1,7 @@
 import {
   View,
   Text,
+  Pressable,
 } from "react-native";
 
 import {
@@ -14,15 +15,17 @@ import {
 
 interface Props {
   items: IntelligenceItem[];
+  onPress?: (item: IntelligenceItem) => void;
 }
 
 
 export default function FounderOpportunitySection({
   items,
+  onPress,
 }: Props) {
 
   return (
-    <View>
+  <View>
 
       <Text
         style={{
@@ -42,9 +45,9 @@ export default function FounderOpportunitySection({
           resolveIntelligenceRelations(item);
 
         return (
-
-          <View
+          <Pressable
             key={item.id || index}
+            onPress={() => onPress?.(item)}
             style={{
               backgroundColor: "#172554",
               padding: 16,
@@ -116,7 +119,7 @@ export default function FounderOpportunitySection({
               </Text>
             )}
 
-          </View>
+          </Pressable>
 
         );
 

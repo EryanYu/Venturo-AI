@@ -168,11 +168,27 @@ return (
 
     <FounderOpportunitySection
       items={founderOpportunities}
+      onPress={(item) => {
+        trackBehavior(
+          "view_intelligence",
+          user.id,
+          item.id,
+          item.relatedTags
+        );
+      }}
     />
 
     <InvestorOpportunitySection
       items={investorOpportunities}
-    />
+      onPress={(item) => {
+        trackBehavior(
+          "view_intelligence",
+          user.id,
+          item.id,
+          item.relatedTags
+        );
+      }}
+     />
 
 <View style={styles.intelligenceSection}>
 

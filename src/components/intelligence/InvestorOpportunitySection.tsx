@@ -16,11 +16,13 @@ import { useRouter } from "expo-router";
 
 interface Props {
   items: IntelligenceItem[];
+  onPress?: (item: IntelligenceItem) => void;
 }
 
 
 export default function InvestorOpportunitySection({
   items,
+  onPress,
 }: Props) {
 
 const router = useRouter();
@@ -66,25 +68,29 @@ return (
             }}
           >
 
-            <Text
-              style={{
-                color: "#fff",
-                fontSize: 16,
-                fontWeight: "600",
-              }}
-            >
-              {item.title}
-            </Text>
+            <Pressable onPress={() => onPress?.(item)}>
+              <Text
+                style={{
+                  color: "#fff",
+                  fontSize: 16,
+                  fontWeight: "600",
+                }}
+               >
+                {item.title}
+               </Text>
+            </Pressable>
 
 
-            <Text
-              style={{
+            <Pressable onPress={() => onPress?.(item)}>
+              <Text
+                style={{
                 color: "#aaa",
                 marginTop: 8,
-              }}
-            >
-              {item.description}
-            </Text>
+                }}
+              >
+                {item.description}
+              </Text>
+            </Pressable>
 
 
             {relations.projects.length > 0 && (
