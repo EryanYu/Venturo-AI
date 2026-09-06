@@ -1,53 +1,28 @@
 export type RecommendationType =
-
-    | "investor"
-    | "expert"
-    | "enterprise"
-    | "project";
-
-
-
+  | "investor"
+  | "expert"
+  | "enterprise"
+  | "project"
+  | "opportunity";
 
 export interface Recommendation {
+  id: string;
 
+  type: RecommendationType;
 
-    id:string;
+  sourceId: string;
 
+  targetId: string;
 
-    type:RecommendationType;
+  title: string;
 
+  description: string;
 
+  category?: string;
 
-    sourceId:string;
+  score: number;
 
+  reasons: string[];
 
-
-    targetId:string;
-
-
-
-    title:string;
-
-
-
-    description:string;
-
-
-
-    category?:string;
-
-    
-
-    score:number;
-
-
-
-    reasons:string[];
-
-
-
-    createdAt:string;
-
-
-
+  createdAt: string;
 }
