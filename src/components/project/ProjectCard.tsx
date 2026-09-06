@@ -1,101 +1,66 @@
 import {
-StyleSheet,
-Text,
-View,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
 } from "react-native";
 
-
-interface Props{
-
-name:string;
-
-industry:string;
-
-stage:string;
-
-description:string;
-
-aiScore?:number;
-
+interface Props {
+  id: string;
+  name: string;
+  industry: string;
+  stage: string;
+  description: string;
+  aiScore?: number;
+  onPress: () => void;
 }
-
 
 export default function ProjectCard({
+  name,
+  industry,
+  stage,
+  description,
+  aiScore,
+  onPress,
+}: Props) {
+  return (
+    <Pressable
+      style={styles.card}
+      onPress={onPress}
+    >
+      <Text style={styles.name}>
+        {name}
+      </Text>
 
-name,
+      <Text>
+        行业：{industry}
+      </Text>
 
-industry,
+      <Text>
+        阶段：{stage}
+      </Text>
 
-stage,
+      <Text>
+        {description}
+      </Text>
 
-description,
-
-aiScore
-
-}:Props){
-
-
-return (
-
-<View style={styles.card}>
-
-
-<Text style={styles.name}>
-{name}
-</Text>
-
-
-<Text>
-行业：{industry}
-</Text>
-
-
-<Text>
-阶段：{stage}
-</Text>
-
-
-<Text>
-{description}
-</Text>
-
-
-<Text>
-AI评分：
-{aiScore}
-</Text>
-
-
-</View>
-
-)
-
+      <Text>
+        AI评分：{aiScore}
+      </Text>
+    </Pressable>
+  );
 }
 
+const styles = StyleSheet.create({
+  card: {
+    backgroundColor: "#fff",
+    padding: 16,
+    borderRadius: 16,
+    marginBottom: 12,
+  },
 
-
-const styles=StyleSheet.create({
-
-card:{
-
-backgroundColor:"#fff",
-
-padding:16,
-
-borderRadius:16,
-
-marginBottom:12
-
-},
-
-
-name:{
-
-fontSize:18,
-
-fontWeight:"700"
-
-}
-
-
+  name: {
+    fontSize: 18,
+    fontWeight: "700",
+  },
 });

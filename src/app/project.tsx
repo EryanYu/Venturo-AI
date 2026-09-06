@@ -8,6 +8,7 @@ import ProjectCard from "@/components/project/ProjectCard";
 import {projectMockData} from "@/data/projectMockData";
 import ProjectMatchSection from "@/components/project/ProjectMatchSection";
 import {generateProjectMatches,} from "@/services/projectMatchingEngine";
+import { router } from "expo-router";
 
 export default function ProjectScreen(){
 
@@ -274,28 +275,23 @@ console.log(
 
 
       {
-      projects.map((item,index)=>(
-
-
-      <ProjectCard
-
-      key={index}
-
-      name={item.name}
-
-      industry={item.industry}
-
-      stage={item.stage}
-
-      description={item.description}
-
-      aiScore={item.aiScore}
-
-
-      />
-
-
-      ))
+        projects.map((item) => (
+          <ProjectCard
+            key={item.id}
+            id={item.id}
+            name={item.name}
+            industry={item.industry}
+            stage={item.stage}
+            description={item.description}
+            aiScore={item.aiScore}
+            onPress={() =>
+              router.push({
+                pathname: "/project-detail",
+                params: { id: item.id },
+              })
+            }
+          />
+        ))
       }
 
 
