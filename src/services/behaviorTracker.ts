@@ -2,7 +2,9 @@ export type BehaviorEventType =
   | "view_intelligence"
   | "view_project"
   | "view_profile"
-  | "connection_intent";
+  | "connection_intent"
+  | "connection_accepted"
+  | "connection_rejected";
 
 export interface BehaviorEvent {
   type: BehaviorEventType;

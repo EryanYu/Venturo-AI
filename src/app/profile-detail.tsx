@@ -17,12 +17,11 @@ import { allProfilesMock } from "@/data/allProfilesMockData";
 
 import { useUser } from "@/context/UserContext";
 
-import { trackBehavior } from "@/services/behaviorTracker";
-
 import {
-  getConnectionStatus,
+  createConnection,
   ConnectionStatus,
 } from "@/services/connectionEngine";
+
 
 export default function ProfileDetailScreen() {
 
@@ -39,26 +38,27 @@ export default function ProfileDetailScreen() {
       item => item.id === id
     );
 
-  const handleConnectionIntent = () => {
+  const handleConnectionIntent = async () => {
   if (!user || !profile) {
     return;
   }
 
-  trackBehavior(
-  "connection_intent",
-  user.id,
-  profile.id,
-  profile.trackTags
-);
+  try {
+    await createConnection({
+      requesterId: user.id,
+      receiverId: profile.id,
+      sourceType: "profile_match",
+      sourceId: profile.id,
+      tags: profile.trackTags,
+    });
+    
+    setConnectionStatus("interested");
+  } catch (error) {
+    console.error("VENTURO CONNECTION ERROR:", error);
+  }
+}; 
 
-  const status =
-    getConnectionStatus(
-      user.id,
-      profile.id
-    );
-
-  setConnectionStatus(status);
-};
+  
 
   if (!profile) {
     return (
@@ -75,6 +75,8 @@ export default function ProfileDetailScreen() {
             返回
           </Text>
         </Pressable>
+
+
       </View>
     );
   }

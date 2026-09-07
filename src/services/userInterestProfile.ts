@@ -23,6 +23,8 @@ const behaviorWeights: Record<BehaviorEventType, number> = {
   view_project: 2,
   view_profile: 3,
   connection_intent: 5,
+  connection_accepted: 5,
+  connection_rejected: 1,
 };
 
   behaviorEvents

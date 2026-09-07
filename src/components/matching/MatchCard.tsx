@@ -1,113 +1,109 @@
 import {
+  Pressable,
   StyleSheet,
   Text,
   View,
 } from "react-native";
 
+import {
+  RecommendationType,
+} from "@/models/recommendation";
 
 interface Props {
+  id?: string;
+  targetId?: string;
+  type?: RecommendationType;
 
-  score:number;
+  score: number;
+  category?: string;
+  reason: string[];
 
-  category?:string;
-
-  reason:string[];
-
+  onConnect?: () => void;
 }
-
 
 export default function MatchCard({
-
+  id,
+  targetId,
+  type,
   score,
-
   category,
-
   reason,
+  onConnect,
+}: Props) {
+  return (
+    <View style={styles.card}>
 
-}:Props){
+      <Text style={styles.title}>
+        🤝 AI投资匹配
+      </Text>
 
+      <Text style={styles.score}>
+        匹配度：{score}%
+      </Text>
 
-return (
+      <Text style={styles.category}>
+        类型：{category}
+      </Text>
 
-<View style={styles.card}>
+      <Text style={styles.reason}>
+        {reason.join("、")}
+      </Text>
 
+      {onConnect && (
+        <Pressable
+          style={styles.connectionButton}
+          onPress={onConnect}
+        >
+          <Text style={styles.connectionButtonText}>
+            🤝 发起连接
+          </Text>
+        </Pressable>
+      )}
 
-<Text style={styles.title}>
-🤝 AI投资匹配
-</Text>
-
-
-<Text style={styles.score}>
-匹配度：{score}%
-</Text>
-
-
-<Text style={styles.category}>
-类型：{category}
-</Text>
-
-
-<Text style={styles.reason}>
-{reason}
-</Text>
-
-
-</View>
-
-)
-
+    </View>
+  );
 }
-
-
 
 const styles = StyleSheet.create({
 
-card:{
+  card: {
+    backgroundColor: "#fff",
+    padding: 16,
+    borderRadius: 16,
+    marginBottom: 12,
+  },
 
-backgroundColor:"#fff",
+  title: {
+    fontSize: 18,
+    fontWeight: "700",
+    marginBottom: 8,
+  },
 
-padding:16,
+  score: {
+    fontSize: 16,
+    fontWeight: "700",
+  },
 
-borderRadius:16,
+  category: {
+    marginTop: 6,
+  },
 
-marginBottom:12,
+  reason: {
+    marginTop: 8,
+    lineHeight: 20,
+  },
 
-},
+  connectionButton: {
+    marginTop: 12,
+    backgroundColor: "#2563eb",
+    padding: 10,
+    borderRadius: 8,
+  },
 
-
-title:{
-
-fontSize:18,
-
-fontWeight:"700",
-
-marginBottom:8,
-
-},
-
-
-score:{
-
-fontSize:16,
-
-fontWeight:"700",
-
-},
-
-
-category:{
-
-marginTop:6,
-
-},
-
-
-reason:{
-
-marginTop:8,
-
-lineHeight:20,
-
-}
+  connectionButtonText: {
+    color: "#fff",
+    textAlign: "center",
+    fontWeight: "700",
+  },
 
 });
