@@ -16,6 +16,7 @@ interface Props {
 
   score: number;
   category?: string;
+  name?: string;
   reason: string[];
 
   onConnect?: () => void;
@@ -27,6 +28,7 @@ export default function MatchCard({
   type,
   score,
   category,
+  name,
   reason,
   onConnect,
 }: Props) {
@@ -35,6 +37,10 @@ export default function MatchCard({
 
       <Text style={styles.title}>
         🤝 AI投资匹配
+      </Text>
+
+      <Text style={styles.name}>
+        {name}
       </Text>
 
       <Text style={styles.score}>
@@ -77,6 +83,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "700",
     marginBottom: 8,
+  },
+
+  name: {
+    fontSize: 17,
+    fontWeight: "600",
+    marginBottom: 6,
   },
 
   score: {

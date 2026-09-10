@@ -15,7 +15,10 @@ export function buildUserInterestProfile(
   userId: string
 ): UserInterestProfile {
   const behaviorEvents = getBehaviorEvents();
-
+  console.log("VENTURO INTEREST SOURCE:", {
+  userId,
+  behaviorEvents,
+});
   const tagScores = new Map<string, number>();
 
 const behaviorWeights: Record<BehaviorEventType, number> = {

@@ -46,7 +46,7 @@ export default function ProfileDetailScreen() {
   try {
     await createConnection({
       requesterId: user.id,
-      receiverId: profile.id,
+      receiverId: profile.userId,
       sourceType: "profile_match",
       sourceId: profile.id,
       tags: profile.trackTags,

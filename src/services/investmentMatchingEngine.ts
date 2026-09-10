@@ -16,6 +16,15 @@ function calculateInvestmentStageScore(
 ): number {
   const supportedStages = stageMap[projectStage];
 
+  console.log(
+  "VENTURO INVESTMENT STAGE DEBUG:",
+  {
+    projectStage,
+    investmentStages,
+    supportedStages,
+  }
+);
+
   return investmentStages.some((stage) => supportedStages.includes(stage))
     ? 20
     : 0;
