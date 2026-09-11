@@ -92,7 +92,7 @@ export default function MatchingScreen() {
 
   /**
    * ============================================================
-   * 3. AI Intelligence �?Profile Matching
+   * 3. AI Intelligence → Profile Matching
    * ============================================================
    *
    * Only recommendations carrying explicit investor / expert
@@ -218,14 +218,14 @@ export default function MatchingScreen() {
 
   /**
    * ============================================================
-   * 5. Project �?Investor Matching
+   * 5. Project → Investor Matching
    * ============================================================
    *
    * Only Investor users enter Investment Matching.
    */
 
   const investmentMatches =
-    profile.role === "投资�?
+    profile.role === "投资人"
       ? projectCandidates
           .map(recommendation => {
             const project =
@@ -275,7 +275,7 @@ export default function MatchingScreen() {
 
   /**
    * ============================================================
-   * 6. Founder �?Investor Matching
+   * 6. Founder → Investor Matching
    * ============================================================
    *
    * Entrepreneur users discover investors through their own
@@ -283,7 +283,7 @@ export default function MatchingScreen() {
    */
 
   const founderInvestmentMatches =
-    profile.role === "创业�?
+    profile.role === "创业者"
       ? projectMockData
           .filter(
             project =>
@@ -466,8 +466,8 @@ export default function MatchingScreen() {
       </View>
 
       {/* ======================================================
-          AI Intelligence Matching
-          ====================================================== */}
+    AI Intelligence Matching
+    ====================================================== */}
 
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>
@@ -476,7 +476,7 @@ export default function MatchingScreen() {
 
         {intelligenceMatches.length === 0 ? (
           <Text style={styles.emptyText}>
-            当前暂无直接的投资人或专家匹配�?
+            当前暂无直接的投资人或专家匹配
           </Text>
         ) : (
           intelligenceMatches.map(item => (
@@ -518,7 +518,7 @@ export default function MatchingScreen() {
 
   {projectCandidates.length === 0 ? (
     <Text style={styles.emptyText}>
-      当前暂无推荐项目�?
+      当前暂无推荐项目
     </Text>
   ) : (
     projectCandidates.map(recommendation => {
@@ -541,15 +541,14 @@ export default function MatchingScreen() {
           </Text>
 
           <Text style={styles.projectType}>
-            项目类型�?
-            {project.trackTags?.join("�?) ||
-              project.industry ||
-              "未分�?}
+            项目类型：
+           {project.trackTags?.join("、") ||
+             project.industry ||
+             "未分类"}
           </Text>
 
           <Text style={styles.projectStage}>
-            项目阶段�?
-            {project.stage}
+            项目阶段：{project.stage}
           </Text>
 
           <Text style={styles.projectScore}>
@@ -558,8 +557,7 @@ export default function MatchingScreen() {
 
           {recommendation.reasons?.length > 0 && (
             <Text style={styles.projectReason}>
-              推荐理由�?
-              {recommendation.reasons.join("�?)}
+              推荐理由：{recommendation.reasons.join("、")}
             </Text>
           )}
 
@@ -580,10 +578,10 @@ export default function MatchingScreen() {
 </View>
 
       {/* ======================================================
-          Project Discovery / Investment Matching
-          ====================================================== */}
+    Project Discovery / Investment Matching
+    ====================================================== */}
 
-      {profile.role === "投资�? && (
+      {profile.role === "投资人" && (
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>
             💰 项目 / 投资匹配
@@ -591,7 +589,7 @@ export default function MatchingScreen() {
 
           {investmentMatches.length === 0 ? (
             <Text style={styles.emptyText}>
-              当前暂无符合条件的项目�?
+              当前暂无符合条件的项目
             </Text>
           ) : (
             investmentMatches.map(item => (
@@ -630,19 +628,19 @@ export default function MatchingScreen() {
       )}
 
       {/* ======================================================
-          Founder �?Investor Matching
-          ====================================================== */}
+    Founder → Investor Matching
+    ====================================================== */}
 
-      {profile.role === "创业�? && (
+      {profile.role === "创业者" && (
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>
-            💰 投资人匹�?
+            💰 投资人匹配
           </Text>
 
           {founderInvestmentMatches.length ===
           0 ? (
             <Text style={styles.emptyText}>
-              当前暂无符合条件的投资人�?
+              当前暂无符合条件的投资人
             </Text>
           ) : (
             founderInvestmentMatches.map(
