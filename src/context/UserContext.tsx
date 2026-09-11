@@ -358,9 +358,10 @@ setProfile(normalizedProfile);
   };
 
   const updatedUser: User = {
-    ...currentUser,
-    role: profile.role,
-  };
+  ...currentUser,
+  name: profile.name,
+  role: profile.role,
+};
 
   setProfile(normalizedProfile);
   setUser(updatedUser);
