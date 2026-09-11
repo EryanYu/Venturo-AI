@@ -7,8 +7,23 @@ import {
 
 import { router } from "expo-router";
 
+import { useEffect } from "react";
+
+import { useUser } from "@/context/UserContext";
 
 export default function HomeScreen(){
+
+  const { user, loading } = useUser();
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.replace("/login");
+    }
+  }, [loading, user]);
+
+  if (loading || !user) {
+    return null;
+  }
 
 
 return (

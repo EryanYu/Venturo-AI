@@ -188,22 +188,7 @@ loading:boolean;
 }
 
 
-const defaultUser:User = {
 
-  id:"001",
-
-  name:"Venturo User",
-
-  role:ROLES.FOUNDER,
-
-  points:1000,
-
-  aiLevel:80,
-
-  createdAt:
-  "2026-08-27"
-
-};
 
 
 
@@ -285,42 +270,20 @@ if (
 
 setProfile(normalizedProfile);
 
-       }else{
-
-       setUser(defaultUser);
-
-        const loadedProfile =
-  await loadProfile(defaultUser.id);
-
-const normalizedProfile =
-  loadedProfile
-    ? normalizeLoadedProfile(loadedProfile)
-    : null;
-
-if (
-  normalizedProfile &&
-  JSON.stringify(normalizedProfile) !==
-  JSON.stringify(loadedProfile)
-) {
-  await saveProfile(normalizedProfile);
+}else{
+  setUser(null);
+  setProfile(null);
 }
-
-setProfile(normalizedProfile);
-
-      }
 
 
       }catch(error){
-
 
         console.log(
           "LOAD USER ERROR:",
           error
         );
 
-
-        setUser(defaultUser);
-        
+        setUser(null);
         setProfile(null);
 
       }finally{
@@ -346,7 +309,9 @@ setProfile(normalizedProfile);
 
 
   function updateRole(role: UserRole) {
-  const currentUser = user ?? defaultUser;
+  if (!user) return;
+
+  const currentUser = user;
 
   const newUser: User = {
     ...currentUser,
@@ -382,7 +347,9 @@ setProfile(normalizedProfile);
 
 
   function updateProfile(profile: UserProfile) {
-  const currentUser = user ?? defaultUser;
+  if (!user) return;
+
+  const currentUser = user;
 
   const normalizedProfile: UserProfile = {
     ...profile,

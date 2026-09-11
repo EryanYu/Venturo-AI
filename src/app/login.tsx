@@ -7,6 +7,10 @@ import {
 
 import { router } from "expo-router";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import { ROLES } from "@/constants/role";
+
 export default function LoginScreen(){
 
   return (
@@ -50,7 +54,23 @@ export default function LoginScreen(){
 
         <Pressable
           style={styles.button}
-          onPress={()=>router.push("/role")}
+          onPress={async () => {
+  const newUser = {
+    id: `user_${Date.now()}`,
+    name: "Venturo User",
+    role: ROLES.FOUNDER,
+    points: 1000,
+    aiLevel: 80,
+    createdAt: new Date().toISOString(),
+  };
+
+  await AsyncStorage.setItem(
+    "user",
+    JSON.stringify(newUser)
+  );
+
+  router.replace("/role");
+}}
         >
 
           <Text style={styles.buttonText}>
