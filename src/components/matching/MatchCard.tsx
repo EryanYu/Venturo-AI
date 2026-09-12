@@ -20,6 +20,8 @@ interface Props {
   reason: string[];
 
   onConnect?: () => void;
+  onViewDetail?: () => void;
+  connectionStatus?: "pending" | "accepted" | "rejected";
 }
 
 export default function MatchCard({
@@ -31,12 +33,18 @@ export default function MatchCard({
   name,
   reason,
   onConnect,
+  onViewDetail,
+  connectionStatus,
 }: Props) {
   return (
     <View style={styles.card}>
 
       <Text style={styles.title}>
-        🤝 AI投资匹配
+        {type === "expert"
+          ? "🧠 AI专家匹配"
+          : type === "investor"
+          ? "🤝 AI投资匹配"
+          : "🤝 AI匹配"}
       </Text>
 
       <Text style={styles.name}>
@@ -54,16 +62,37 @@ export default function MatchCard({
       <Text style={styles.reason}>
         {reason.join("、")}
       </Text>
+      {onViewDetail && (
+        <Pressable
+          style={styles.connectionButton}
+          onPress={onViewDetail}
+        >
+          <Text style={styles.connectionButtonText}>
+            查看详情
+          </Text>
+        </Pressable>
+     )}
 
-      {onConnect && (
+      {onConnect && connectionStatus !== "accepted" && (
         <Pressable
           style={styles.connectionButton}
           onPress={onConnect}
+          disabled={connectionStatus === "pending"}
         >
           <Text style={styles.connectionButtonText}>
-            🤝 发起连接
+            {connectionStatus === "pending"
+              ? "⏳ 等待对方回应"
+              : connectionStatus === "rejected"
+              ? "🤝 再次发起连接"
+              : "🤝 发起连接"}
           </Text>
-        </Pressable>
+         </Pressable>
+      )}
+
+      {connectionStatus === "accepted" && (
+        <Text style={styles.connectionButtonText}>
+          ✅ 已连接
+        </Text>
       )}
 
     </View>

@@ -1,3 +1,7 @@
+import { useEffect, useState } from "react";
+
+import { router } from "expo-router";
+
 import {
   Pressable,
   StyleSheet,
@@ -35,13 +39,27 @@ import {
   generateInvestmentMatches,
 } from "@/services/investmentMatchingEngine";
 
-import { createConnection } from "@/services/connectionEngine";
+import {
+  createConnection,
+  getConnections,
+} from "@/services/connectionEngine";
 
 import { InvestorProfile } from "@/models/profile";
 
+import { Connection } from "@/models/connection";
+
 export default function MatchingScreen() {
   const { user, profile } = useUser();
+  const [connections, setConnections] = useState<Connection[]>([]);
 
+  useEffect(() => {
+    if (!user) {
+      setConnections([]);
+      return;
+    }
+
+    getConnections(user.id).then(setConnections);
+  }, [user]);
   if (!user || !profile) {
     return (
       <View style={styles.container}>
@@ -346,7 +364,7 @@ export default function MatchingScreen() {
           tags:
             item.recommendation.relatedTags,
         });
-
+      setConnections(await getConnections(user.id));
       console.log(
         "VENTURO AI INTELLIGENCE CONNECTION:",
         connection
@@ -376,7 +394,7 @@ export default function MatchingScreen() {
             ...(item.project.needTags ?? []),
           ],
         });
-
+      setConnections(await getConnections(user.id));
       console.log(
         "VENTURO AI INVESTMENT CONNECTION:",
         connection
@@ -407,7 +425,7 @@ export default function MatchingScreen() {
               ...(item.project.needTags ?? []),
             ],
           });
-
+        setConnections(await getConnections(user.id));
         console.log(
           "VENTURO AI FOUNDER INVESTMENT CONNECTION:",
           connection
@@ -434,7 +452,7 @@ export default function MatchingScreen() {
         ...(project.needTags ?? []),
       ],
     });
-
+    setConnections(await getConnections(user.id));
     console.log(
       "VENTURO PROJECT CONNECTION:",
       connection
@@ -479,8 +497,10 @@ export default function MatchingScreen() {
             当前暂无直接的投资人或专家匹配
           </Text>
         ) : (
-          intelligenceMatches.map(item => (
-            <MatchCard
+          intelligenceMatches.map(item => {
+
+            return (
+              <MatchCard
               key={`intelligence_${item.recommendation.id}_${item.targetProfile.id}`}
               id={item.recommendation.id}
               targetId={item.targetProfile.id}
@@ -502,8 +522,21 @@ export default function MatchingScreen() {
                   item
                 )
               }
-            />
-          ))
+              onViewDetail={() =>
+                router.push(
+                  `/profile-detail?id=${item.targetProfile.id}`
+               )
+              }
+              connectionStatus={
+                connections.find(
+                  connection =>
+                    connection.requesterId === user.id &&
+                    connection.receiverId === item.targetProfile.userId
+                        )?.status
+               }
+                />
+  );
+})
         )}
       </View>
 
@@ -560,6 +593,19 @@ export default function MatchingScreen() {
               推荐理由：{recommendation.reasons.join("、")}
             </Text>
           )}
+
+           <Pressable
+             style={styles.projectButton}
+             onPress={() =>
+               router.push(
+                 `/project-detail?id=${project.id}`
+         )
+        }
+           >
+         <Text style={styles.projectButtonText}>
+           查看详情
+         </Text>
+          </Pressable>
 
           <Pressable
             style={styles.projectButton}
