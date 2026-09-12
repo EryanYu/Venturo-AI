@@ -10,7 +10,8 @@ import {
   useState,
 } from "react";
 
-import {useUser} from "@/context/UserContext";
+import { useUser } from "@/context/UserContext";
+
 import {
   rankIntelligence,
 } from "@/services/intelligenceRelevanceEngine";
@@ -180,15 +181,25 @@ return (
 
     <InvestorOpportunitySection
       items={investorOpportunities}
-      onPress={(item) => {
-        trackBehavior(
-          "view_intelligence",
-          user.id,
-          item.id,
-          item.relatedTags
+      onPress={(item, profileId, profileTags) => {
+        if (profileId) {
+          trackBehavior(
+            "view_profile",
+            user.id,
+            profileId,
+            profileTags || []
+          );
+          return;
+         }
+
+         trackBehavior(
+           "view_intelligence",
+           user.id,
+           item.id,
+           item.relatedTags
         );
       }}
-     />
+    />
 
 <View style={styles.intelligenceSection}>
 

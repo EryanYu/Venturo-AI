@@ -5,38 +5,60 @@ import {
   Pressable,
 } from "react-native";
 
+import { useUser } from "@/context/UserContext";
+import { InvestorProfile } from "@/models/profile";
 
-export default function InvestorDashboard(){
+export default function InvestorDashboard() {
+  const { user, profile } = useUser();
 
+  const investorProfile = profile as InvestorProfile | null;
 
   return (
-
     <View style={styles.container}>
+
+      {/* 投资人资料 */}
+
+      <View style={styles.card}>
+
+        <Text style={styles.cardTitle}>
+          👤 投资人资料
+        </Text>
+
+        <Text style={styles.mainText}>
+          {user?.name || "未设置姓名"}
+        </Text>
+
+        <Text style={styles.desc}>
+          {investorProfile?.industry || "未设置行业"}
+          {" · "}
+          {investorProfile?.trackTags?.join("、") || "未设置赛道"}
+        </Text>
+
+        <Text style={styles.desc}>
+          投资阶段：
+          {investorProfile?.investmentStages?.join("、") || "未设置"}
+        </Text>
+
+      </View>
 
 
       {/* 投资组合 */}
 
       <View style={styles.card}>
 
-
         <Text style={styles.cardTitle}>
           💰 我的投资组合
         </Text>
-
 
         <Text style={styles.mainText}>
           AI科技投资组合
         </Text>
 
-
         <Text style={styles.desc}>
           项目管理、投资阶段、行业布局
         </Text>
 
-
-
         <View style={styles.row}>
-
 
           <View style={styles.infoBox}>
 
@@ -51,7 +73,6 @@ export default function InvestorDashboard(){
           </View>
 
 
-
           <View style={styles.infoBox}>
 
             <Text style={styles.number}>
@@ -64,30 +85,22 @@ export default function InvestorDashboard(){
 
           </View>
 
-
         </View>
 
-
       </View>
-
-
 
 
       {/* AI项目发现 */}
 
       <View style={styles.card}>
 
-
         <Text style={styles.cardTitle}>
           🤖 AI项目发现
         </Text>
 
-
         <Text style={styles.desc}>
           AI筛选优质创业项目，发现投资机会
         </Text>
-
-
 
         <Pressable style={styles.button}>
 
@@ -97,25 +110,18 @@ export default function InvestorDashboard(){
 
         </Pressable>
 
-
       </View>
-
-
 
 
       {/* 投资流程 */}
 
       <View style={styles.card}>
 
-
         <Text style={styles.cardTitle}>
           📊 投资流程
         </Text>
 
-
-
         <View style={styles.row}>
-
 
           <View style={styles.infoBox}>
 
@@ -128,7 +134,6 @@ export default function InvestorDashboard(){
             </Text>
 
           </View>
-
 
 
           <View style={styles.infoBox}>
@@ -144,7 +149,6 @@ export default function InvestorDashboard(){
           </View>
 
 
-
           <View style={styles.infoBox}>
 
             <Text style={styles.number}>
@@ -157,27 +161,20 @@ export default function InvestorDashboard(){
 
           </View>
 
-
         </View>
 
-
       </View>
-
-
 
 
       {/* 投资资产 */}
 
       <View style={styles.card}>
 
-
         <Text style={styles.cardTitle}>
           💎 投资资产
         </Text>
 
-
         <View style={styles.row}>
-
 
           <View style={styles.infoBox}>
 
@@ -190,7 +187,6 @@ export default function InvestorDashboard(){
             </Text>
 
           </View>
-
 
 
           <View style={styles.infoBox}>
@@ -206,7 +202,6 @@ export default function InvestorDashboard(){
           </View>
 
 
-
           <View style={styles.infoBox}>
 
             <Text style={styles.number}>
@@ -219,94 +214,79 @@ export default function InvestorDashboard(){
 
           </View>
 
-
         </View>
-
 
       </View>
 
-
     </View>
-
   );
-
 }
-
 
 
 const styles = StyleSheet.create({
 
-  container:{
-    marginTop:20,
-    gap:12,
+  container: {
+    marginTop: 20,
+    gap: 12,
   },
 
-
-  card:{
-    backgroundColor:"#111936",
-    borderRadius:14,
-    padding:16,
+  card: {
+    backgroundColor: "#111936",
+    borderRadius: 14,
+    padding: 16,
   },
 
-
-  cardTitle:{
-    color:"#ffffff",
-    fontSize:17,
-    fontWeight:"700",
-    marginBottom:10,
+  cardTitle: {
+    color: "#ffffff",
+    fontSize: 17,
+    fontWeight: "700",
+    marginBottom: 10,
   },
 
-
-  mainText:{
-    color:"#ffffff",
-    fontSize:16,
-    marginBottom:5,
+  mainText: {
+    color: "#ffffff",
+    fontSize: 16,
+    marginBottom: 5,
   },
 
-
-  desc:{
-    color:"#8fa5d8",
-    fontSize:13,
+  desc: {
+    color: "#8fa5d8",
+    fontSize: 13,
+    marginTop: 4,
   },
 
-
-  row:{
-    flexDirection:"row",
-    justifyContent:"space-between",
-    marginTop:15,
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 15,
   },
 
-
-  infoBox:{
-    alignItems:"center",
+  infoBox: {
+    alignItems: "center",
   },
 
-
-  number:{
-    color:"#f5b700",
-    fontSize:20,
-    fontWeight:"700",
+  number: {
+    color: "#f5b700",
+    fontSize: 20,
+    fontWeight: "700",
   },
 
-
-  label:{
-    color:"#8fa5d8",
-    fontSize:12,
+  label: {
+    color: "#8fa5d8",
+    fontSize: 12,
   },
 
-
-  button:{
-    marginTop:15,
-    backgroundColor:"#2563eb",
-    paddingVertical:10,
-    borderRadius:8,
-    alignItems:"center",
+  button: {
+    marginTop: 15,
+    backgroundColor: "#2563eb",
+    paddingVertical: 10,
+    borderRadius: 8,
+    alignItems: "center",
   },
 
-
-  buttonText:{
-    color:"#ffffff",
-    fontWeight:"700",
+  buttonText: {
+    color: "#ffffff",
+    fontWeight: "700",
   },
 
 });

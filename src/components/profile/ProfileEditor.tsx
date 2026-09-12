@@ -37,7 +37,7 @@ function joinTags(value: string[]): string {
 function createDefaultProfile(
   role: UserProfile["role"] = "创业者"
 ): UserProfile {
-  return {
+  const baseProfile = {
     id: `profile_${Date.now()}`,
     userId: "",
     name: "",
@@ -51,10 +51,48 @@ function createDefaultProfile(
     resources: [],
     description: "",
     createdAt: new Date().toISOString(),
-    startupName: "",
-    fundingStage: "idea",
-    fundingNeed: "",
-  } as FounderProfile;
+  };
+
+  switch (role) {
+    case "投资人":
+      return {
+        ...baseProfile,
+        role: "投资人",
+        investmentStages: [],
+        ticketSize: "",
+        portfolio: [],
+      } as InvestorProfile;
+
+    case "专家/顾问":
+      return {
+        ...baseProfile,
+        role: "专家/顾问",
+        expertise: [],
+        background: "",
+        patents: [],
+        canJoinStartup: false,
+        availableForPitch: false,
+      } as ExpertProfile;
+
+    case "企业/产业合作方":
+      return {
+        ...baseProfile,
+        role: "企业/产业合作方",
+        companyName: "",
+        industryNeeds: [],
+        cooperationTypes: [],
+      } as EnterpriseProfile;
+
+    case "创业者":
+    default:
+      return {
+        ...baseProfile,
+        role: "创业者",
+        startupName: "",
+        fundingStage: "idea",
+        fundingNeed: "",
+      } as FounderProfile;
+  }
 }
 
 export default function ProfileEditor({

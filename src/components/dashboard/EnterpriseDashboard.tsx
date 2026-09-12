@@ -5,38 +5,61 @@ import {
   Pressable,
 } from "react-native";
 
+import { useUser } from "@/context/UserContext";
+import { EnterpriseProfile } from "@/models/profile";
 
-export default function EnterpriseDashboard(){
+export default function EnterpriseDashboard() {
+  const { user, profile } = useUser();
 
+  const enterpriseProfile = profile as EnterpriseProfile | null;
 
   return (
-
     <View style={styles.container}>
+
+      {/* 企业资料 */}
+
+      <View style={styles.card}>
+
+        <Text style={styles.cardTitle}>
+          👤 企业资料
+        </Text>
+
+        <Text style={styles.mainText}>
+          {user?.name || "未设置联系人"}
+        </Text>
+
+        <Text style={styles.desc}>
+          {enterpriseProfile?.companyName || "未设置企业名称"}
+          {" · "}
+          {enterpriseProfile?.industry || "未设置行业"}
+        </Text>
+
+        <Text style={styles.desc}>
+          产业需求：
+          {enterpriseProfile?.industryNeeds?.join("、") || "未设置"}
+        </Text>
+
+      </View>
 
 
       {/* 企业创新中心 */}
 
       <View style={styles.card}>
 
-
         <Text style={styles.cardTitle}>
           🏢 企业创新中心
         </Text>
 
-
         <Text style={styles.mainText}>
           产业创新与技术合作平台
         </Text>
-
 
         <Text style={styles.desc}>
           发布产业需求，寻找创新项目与技术方案
         </Text>
 
 
-
         <View style={styles.row}>
-
 
           <View style={styles.infoBox}>
 
@@ -51,7 +74,6 @@ export default function EnterpriseDashboard(){
           </View>
 
 
-
           <View style={styles.infoBox}>
 
             <Text style={styles.number}>
@@ -64,60 +86,45 @@ export default function EnterpriseDashboard(){
 
           </View>
 
-
         </View>
 
-
       </View>
-
-
 
 
       {/* 技术与项目发现 */}
 
       <View style={styles.card}>
 
-
         <Text style={styles.cardTitle}>
           🔎 项目发现
         </Text>
-
 
         <Text style={styles.desc}>
           AI项目筛选、技术寻找、创业团队发现
         </Text>
 
 
-
         <Pressable style={styles.button}>
-
 
           <Text style={styles.buttonText}>
             发布产业需求
           </Text>
 
-
         </Pressable>
 
-
       </View>
-
-
 
 
       {/* 产业合作 */}
 
       <View style={styles.card}>
 
-
         <Text style={styles.cardTitle}>
           🤝 产业合作
         </Text>
 
 
-
         <View style={styles.row}>
-
 
           <View style={styles.infoBox}>
 
@@ -130,8 +137,6 @@ export default function EnterpriseDashboard(){
             </Text>
 
           </View>
-
-
 
 
           <View style={styles.infoBox}>
@@ -147,8 +152,6 @@ export default function EnterpriseDashboard(){
           </View>
 
 
-
-
           <View style={styles.infoBox}>
 
             <Text style={styles.number}>
@@ -161,28 +164,21 @@ export default function EnterpriseDashboard(){
 
           </View>
 
-
         </View>
 
-
       </View>
-
-
 
 
       {/* 企业资产 */}
 
       <View style={styles.card}>
 
-
         <Text style={styles.cardTitle}>
           💎 企业资产
         </Text>
 
 
-
         <View style={styles.row}>
-
 
           <View style={styles.infoBox}>
 
@@ -195,7 +191,6 @@ export default function EnterpriseDashboard(){
             </Text>
 
           </View>
-
 
 
           <View style={styles.infoBox}>
@@ -211,8 +206,6 @@ export default function EnterpriseDashboard(){
           </View>
 
 
-
-
           <View style={styles.infoBox}>
 
             <Text style={styles.number}>
@@ -225,95 +218,78 @@ export default function EnterpriseDashboard(){
 
           </View>
 
-
         </View>
-
 
       </View>
 
-
     </View>
-
   );
-
 }
-
 
 
 const styles = StyleSheet.create({
 
-  container:{
-    marginTop:20,
-    gap:12,
+  container: {
+    marginTop: 20,
+    gap: 12,
   },
 
-
-  card:{
-    backgroundColor:"#111936",
-    borderRadius:14,
-    padding:16,
+  card: {
+    backgroundColor: "#111936",
+    borderRadius: 14,
+    padding: 16,
   },
 
-
-  cardTitle:{
-    color:"#ffffff",
-    fontSize:17,
-    fontWeight:"700",
-    marginBottom:10,
+  cardTitle: {
+    color: "#ffffff",
+    fontSize: 17,
+    fontWeight: "700",
+    marginBottom: 10,
   },
 
-
-  mainText:{
-    color:"#ffffff",
-    fontSize:16,
-    marginBottom:5,
+  mainText: {
+    color: "#ffffff",
+    fontSize: 16,
+    marginBottom: 5,
   },
 
-
-  desc:{
-    color:"#8fa5d8",
-    fontSize:13,
+  desc: {
+    color: "#8fa5d8",
+    fontSize: 13,
   },
 
-
-  row:{
-    flexDirection:"row",
-    justifyContent:"space-between",
-    marginTop:15,
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 15,
   },
 
-
-  infoBox:{
-    alignItems:"center",
+  infoBox: {
+    alignItems: "center",
   },
 
-
-  number:{
-    color:"#f5b700",
-    fontSize:20,
-    fontWeight:"700",
+  number: {
+    color: "#f5b700",
+    fontSize: 20,
+    fontWeight: "700",
   },
 
-
-  label:{
-    color:"#8fa5d8",
-    fontSize:12,
+  label: {
+    color: "#8fa5d8",
+    fontSize: 12,
   },
 
-
-  button:{
-    marginTop:15,
-    backgroundColor:"#2563eb",
-    paddingVertical:10,
-    borderRadius:8,
-    alignItems:"center",
+  button: {
+    marginTop: 15,
+    backgroundColor: "#2563eb",
+    paddingVertical: 10,
+    borderRadius: 8,
+    alignItems: "center",
   },
 
-
-  buttonText:{
-    color:"#ffffff",
-    fontWeight:"700",
+  buttonText: {
+    color: "#ffffff",
+    fontWeight: "700",
   },
-
 
 });

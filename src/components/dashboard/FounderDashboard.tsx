@@ -5,38 +5,60 @@ import {
   Pressable,
 } from "react-native";
 
+import { useUser } from "@/context/UserContext";
+import { FounderProfile } from "@/models/profile";
 
-export default function FounderDashboard(){
+export default function FounderDashboard() {
+  const { user, profile } = useUser();
 
+  const founderProfile = profile as FounderProfile | null;
 
   return (
-
     <View style={styles.container}>
+
+      {/* 创业者资料 */}
+
+      <View style={styles.card}>
+
+        <Text style={styles.cardTitle}>
+          👤 创业者资料
+        </Text>
+
+        <Text style={styles.mainText}>
+          {user?.name || "未设置姓名"}
+        </Text>
+
+        <Text style={styles.desc}>
+          {founderProfile?.industry || "未设置行业"}
+          {" · "}
+          {founderProfile?.trackTags?.join("、") || "未设置赛道"}
+        </Text>
+
+        <Text style={styles.desc}>
+          融资阶段：
+          {founderProfile?.fundingStage || "未设置"}
+        </Text>
+
+      </View>
 
 
       {/* 项目中心 */}
 
       <View style={styles.card}>
 
-
         <Text style={styles.cardTitle}>
           🚀 我的项目
         </Text>
 
-
         <Text style={styles.mainText}>
-          Venturo AI 创业项目
+          {founderProfile?.startupName || "未设置项目名称"}
         </Text>
-
 
         <Text style={styles.desc}>
           AI创业生态平台
         </Text>
 
-
-
         <View style={styles.row}>
-
 
           <View style={styles.infoBox}>
 
@@ -50,8 +72,6 @@ export default function FounderDashboard(){
 
           </View>
 
-
-
           <View style={styles.infoBox}>
 
             <Text style={styles.number}>
@@ -64,30 +84,22 @@ export default function FounderDashboard(){
 
           </View>
 
-
         </View>
 
-
       </View>
-
-
 
 
       {/* AI创业助手 */}
 
       <View style={styles.card}>
 
-
         <Text style={styles.cardTitle}>
           🤖 AI创业助手
         </Text>
 
-
         <Text style={styles.desc}>
           AI诊断、BP优化、商业模式分析
         </Text>
-
-
 
         <Pressable style={styles.button}>
 
@@ -97,30 +109,22 @@ export default function FounderDashboard(){
 
         </Pressable>
 
-
       </View>
-
-
 
 
       {/* 融资中心 */}
 
       <View style={styles.card}>
 
-
         <Text style={styles.cardTitle}>
           💰 融资中心
         </Text>
-
 
         <Text style={styles.desc}>
           投资人匹配、融资流程管理、尽调支持
         </Text>
 
-
-
         <View style={styles.row}>
-
 
           <View style={styles.infoBox}>
 
@@ -132,49 +136,34 @@ export default function FounderDashboard(){
               匹配投资人
             </Text>
 
-
           </View>
 
-
-
           <View style={styles.infoBox}>
-
 
             <Text style={styles.number}>
               3
             </Text>
 
-
             <Text style={styles.label}>
               沟通中项目
             </Text>
 
-
           </View>
-
 
         </View>
 
-
       </View>
-
-
-
 
 
       {/* 创业资产 */}
 
       <View style={styles.card}>
 
-
         <Text style={styles.cardTitle}>
           💎 创业资产
         </Text>
 
-
-
         <View style={styles.row}>
-
 
           <View style={styles.infoBox}>
 
@@ -188,9 +177,6 @@ export default function FounderDashboard(){
 
           </View>
 
-
-
-
           <View style={styles.infoBox}>
 
             <Text style={styles.number}>
@@ -202,9 +188,6 @@ export default function FounderDashboard(){
             </Text>
 
           </View>
-
-
-
 
           <View style={styles.infoBox}>
 
@@ -218,153 +201,79 @@ export default function FounderDashboard(){
 
           </View>
 
-
         </View>
-
 
       </View>
 
-
     </View>
-
   );
-
 }
-
 
 
 const styles = StyleSheet.create({
 
-  container:{
-
-
-    marginTop:20,
-
-    gap:12,
-
+  container: {
+    marginTop: 20,
+    gap: 12,
   },
 
-
-  card:{
-
-
-    backgroundColor:"#111936",
-
-    borderRadius:14,
-
-    padding:16,
-
-
+  card: {
+    backgroundColor: "#111936",
+    borderRadius: 14,
+    padding: 16,
   },
 
-
-  cardTitle:{
-
-
-    color:"#ffffff",
-
-    fontSize:17,
-
-    fontWeight:"700",
-
-    marginBottom:10,
-
-
+  cardTitle: {
+    color: "#ffffff",
+    fontSize: 17,
+    fontWeight: "700",
+    marginBottom: 10,
   },
 
-
-  mainText:{
-
-
-    color:"#ffffff",
-
-    fontSize:16,
-
-    marginBottom:5,
-
-
+  mainText: {
+    color: "#ffffff",
+    fontSize: 16,
+    marginBottom: 5,
   },
 
-
-  desc:{
-
-
-    color:"#8fa5d8",
-
-    fontSize:13,
-
+  desc: {
+    color: "#8fa5d8",
+    fontSize: 13,
+    marginTop: 4,
   },
 
-
-  row:{
-
-
-    flexDirection:"row",
-
-    justifyContent:"space-between",
-
-    marginTop:15,
-
-
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 15,
   },
 
-
-  infoBox:{
-
-
-    alignItems:"center",
-
+  infoBox: {
+    alignItems: "center",
   },
 
-
-  number:{
-
-
-    color:"#f5b700",
-
-    fontSize:20,
-
-    fontWeight:"700",
-
-
+  number: {
+    color: "#f5b700",
+    fontSize: 20,
+    fontWeight: "700",
   },
 
-
-  label:{
-
-
-    color:"#8fa5d8",
-
-    fontSize:12,
-
-
+  label: {
+    color: "#8fa5d8",
+    fontSize: 12,
   },
 
-
-  button:{
-
-
-    marginTop:15,
-
-    backgroundColor:"#2563eb",
-
-    paddingVertical:10,
-
-    borderRadius:8,
-
-    alignItems:"center",
-
+  button: {
+    marginTop: 15,
+    backgroundColor: "#2563eb",
+    paddingVertical: 10,
+    borderRadius: 8,
+    alignItems: "center",
   },
 
-
-  buttonText:{
-
-
-    color:"#ffffff",
-
-    fontWeight:"700",
-
+  buttonText: {
+    color: "#ffffff",
+    fontWeight: "700",
   },
-
 
 });

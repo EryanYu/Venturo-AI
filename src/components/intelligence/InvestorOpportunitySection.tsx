@@ -14,9 +14,16 @@ import {
 
 import { useRouter } from "expo-router";
 
+
+import { trackBehavior } from "@/services/behaviorTracker";
+
 interface Props {
   items: IntelligenceItem[];
-  onPress?: (item: IntelligenceItem) => void;
+  onPress?: (
+    item: IntelligenceItem,
+    profileId?: string,
+    profileTags?: string[]
+  ) => void;
 }
 
 
@@ -124,18 +131,24 @@ return (
         </Text>
 
         <Pressable
-          onPress={() =>
+          onPress={() => {
+            onPress?.(
+              item,
+              profile.id,
+              profile.trackTags
+            );
+
             router.push({
               pathname: "/profile-detail",
               params: {
                 id: profile.id,
               },
-            })
-          }
-          style={{
-            marginTop: 6,
-          }}
-        >
+           });
+         }}
+         style={{
+           marginTop: 6,
+         }}
+         >
           <Text
             style={{
               color: "#60a5fa",
